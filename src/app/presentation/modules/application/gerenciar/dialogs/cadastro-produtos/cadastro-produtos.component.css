@@ -1,0 +1,4 @@
+.list_input-column {
+  display: flex;
+  flex-direction: column;
+}

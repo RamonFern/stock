@@ -1,1 +1,175 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    color: #575757;
+}
+
+.shadow-light {
+    background: #ffffff !important;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+.snackbar {
+    white-space: pre-wrap;
+}
+
+::ng-deep .mat-form-field {
+    font-size: 10px;
+}
+
+::ng-deep.cdk-overlay-pane {
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 1000px) {
+    ::ng-deep .cdk-overlay-pane {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.headline-4 {
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: 700;
+}
+
+.headline-5 {
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 600;
+}
+
+.headline-6 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 32px;
+}
+
+.caption {
+    font-weight: 400;
+    font-size: 12px;
+    height: 16px;
+}
+
+.overline {
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: rgba(0, 0, 0, 0.6);
+    display: block;
+    text-transform: uppercase;
+}
+
+.subtitle-1 {
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.subtitle-1-0 {
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.15px;
+}
+
+.subtitle-2 {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.body-1 {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    color: rgba(0, 0, 0, 0.38);
+}
+
+.body-2 {
+    font-weight: 400;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.button {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16px;
+}
+
+/* //////////////////  botoes footer dialog  ///////////////////////////// */
+
+.button-group-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-bottom {
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    /* padding: 0px 16px; */
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.button-bottom:hover {
+    cursor: pointer;
+}
+
+/* ////////////////////////////////////////////// */
+
+.extended-fab-button .mat-fab {
+    width: unset;
+    padding: 0 26px;
+    border-radius: 29px;
+}
+
+.extended-fab-button .mat-fab > .mat-icon {
+    margin-right: 10px;
+}
+
+.extended-fab-button .mat-fab > .extended-fab-button__text {
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.mat-tab-label.mat-tab-label-active {
+    color: #3560f1 !important;
+    opacity: 1 !important;
+}
+
+.flex {
+    display: flex;
+}
+.align-items-center {
+    align-items: center;
+}
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+.gap-0 {
+    gap: 4px;
+}
+.gap-1 {
+    gap: 8px;
+}
+
+.gap-2 {
+    gap: 16px;
+}
+
+.gap-3 {
+    gap: 24px;
+}

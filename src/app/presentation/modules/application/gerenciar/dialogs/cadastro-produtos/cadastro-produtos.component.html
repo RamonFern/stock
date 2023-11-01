@@ -1,0 +1,36 @@
+<div class="second-form-wrapper" >
+  <mat-dialog-content>
+    <form [formGroup]="form">
+        <span class="subtitle-2">Cadastro de Produtos</span>
+
+
+        <div class="list_input-column">
+            <mat-form-field appearance="outline">
+                <mat-label>Nome do produto</mat-label>
+                <input matInput type="text" name="nomeDoProduto" formControlName="nomeDoProduto" required />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Marca</mat-label>
+                <input matInput type="text" name="marca" formControlName="marca" required />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Quantidade</mat-label>
+                <input matInput type="number" name="quantidade" formControlName="quantidade" required />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Valor da unidade</mat-label>
+              <input matInput type="number" name="valorUnidade" formControlName="valorUnidade" required />
+            </mat-form-field>
+
+        </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="create()">
+      <div>SALVAR</div>
+      <!-- <div *ngIf="loadRequisicao"><mat-spinner diameter="40"></mat-spinner></div> -->
+    </button>
+  </mat-dialog-actions>
+</div>
