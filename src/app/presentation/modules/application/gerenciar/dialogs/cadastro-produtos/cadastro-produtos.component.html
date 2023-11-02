@@ -2,12 +2,10 @@
   <mat-dialog-content>
     <form [formGroup]="form">
         <span class="subtitle-2">Cadastro de Produtos</span>
-
-
         <div class="list_input-column">
             <mat-form-field appearance="outline">
                 <mat-label>Nome do produto</mat-label>
-                <input matInput type="text" name="nomeDoProduto" formControlName="nomeDoProduto" required />
+                <input matInput type="text" name="nome" formControlName="nome" required />
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Marca</mat-label>
@@ -16,7 +14,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Quantidade</mat-label>
-                <input matInput type="number" name="quantidade" formControlName="quantidade" required />
+                <input matInput type="number" name="qntdEstoque" formControlName="qntdEstoque" required />
             </mat-form-field>
 
             <mat-form-field appearance="outline">

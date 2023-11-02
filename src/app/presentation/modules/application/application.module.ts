@@ -7,6 +7,9 @@ import { MenuComponent } from './layout/components/menu/menu.component';
 import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
@@ -31,9 +34,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       FormsModule,
       ReactiveFormsModule,
       MatDialogModule,
+      MatTableModule,
+      MatButtonModule,
       MatFormFieldModule,
       MatOptionModule,
       MatInputModule,
+      MatSnackBarModule,
       MatOptionModule,
       MatSelectModule,
       MatIconModule

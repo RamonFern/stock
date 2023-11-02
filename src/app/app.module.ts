@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ApplicationModule } from './presentation/modules/application/application.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ApplicationModule } from './presentation/modules/application/applicatio
     AppRoutingModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
+    HttpClientModule,
     MatIconModule,
     ApplicationModule
   ],
