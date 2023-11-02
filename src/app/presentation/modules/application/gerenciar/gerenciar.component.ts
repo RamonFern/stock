@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProdutoService } from 'src/app/domain/api/application/produto/service/produto.service';
 import { take } from 'rxjs';
 import { ProdutoResponse } from 'src/app/domain/api/application/produto/response/produto-response';
+import { MatTableDataSource } from '@angular/material/table';
 
 // export interface PeriodicElement {
 //   name: string;
@@ -35,23 +36,30 @@ import { ProdutoResponse } from 'src/app/domain/api/application/produto/response
 })
 export class GerenciarComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nome', 'marca', 'qntdEstoque', 'valor'];
-  table = false;
-  dataSource!: ProdutoResponse[];
+  // table = false;
+  dataSource = new MatTableDataSource();
+  // dataSource!: ProdutoResponse[];
 
   constructor(public dialog: MatDialog, private produtoService: ProdutoService) {
   }
 
   ngOnInit() {
+
     this.listarProdutos();
     // const ELEMENT_DATA: ProdutoResponse[] = [];
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   listarProdutos() {
     this.produtoService.listAll()
         .pipe(take(1))
         .subscribe((list) => {
-          this.dataSource = list;
-          this.table = true;
+          this.dataSource.data = list
+          // this.table = true;
           console.log(list);
         })
   }

@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   flex: 1 1 auto;
+  justify-content: center;
 }
 
 .tab-label {
@@ -46,5 +47,19 @@
 
 .table {
   width: 100%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.field {
+  width: 100%;
+  margin-bottom: 10px;
 }
 

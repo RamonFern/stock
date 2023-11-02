@@ -1,46 +1,69 @@
-
-<div class="tabs__nav-bar" #navbar (click)="cadastroProduto()">
-  <a  class="tab-label">
-    <mat-icon class="nav__icon">trending_up</mat-icon>
-    <span class="headline-4 tab-label__title">Cadastrar produto </span>
-  </a>
+<div class="buttons">
+  <div class="tabs__nav-bar" #navbar (click)="cadastroProduto()">
+    <a  class="tab-label">
+      <mat-icon class="nav__icon">trending_up</mat-icon>
+      <span class="headline-4 tab-label__title">Cadastrar produto </span>
+    </a>
+  </div>
+  <div class="tabs__nav-bar" #navbar >
+    <a  class="tab-label">
+      <mat-icon class="nav__icon">people</mat-icon>
+      <span class="headline-4 tab-label__title">Alterar produto </span>
+    </a>
+  </div>
+  <div class="tabs__nav-bar" #navbar >
+    <a  class="tab-label">
+      <mat-icon class="nav__icon">delete</mat-icon>
+      <span class="headline-4 tab-label__title">Deletar produto </span>
+    </a>
+  </div>
 </div>
-<!-- <ng-container *ngIf="table"> -->
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
-    <!-- Position Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> Cod </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+<div class="mat-elevation-z6 field">
+  <mat-form-field class="form-field">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+  </mat-form-field>
+</div>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef> Nome </th>
-      <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
-    </ng-container>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Cod </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="marca">
-      <th mat-header-cell *matHeaderCellDef> Marca </th>
-      <td mat-cell *matCellDef="let element"> {{element.marca}} </td>
-    </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="nome">
+    <th mat-header-cell *matHeaderCellDef> Nome </th>
+    <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+  </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="qntdEstoque">
-      <th mat-header-cell *matHeaderCellDef> Quantidade </th>
-      <td mat-cell *matCellDef="let element"> {{element.qntdEstoque}} </td>
-    </ng-container>
+  <!-- Weight Column -->
+  <ng-container matColumnDef="marca">
+    <th mat-header-cell *matHeaderCellDef> Marca </th>
+    <td mat-cell *matCellDef="let element"> {{element.marca}} </td>
+  </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="valor">
-      <th mat-header-cell *matHeaderCellDef> Valor </th>
-      <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
-    </ng-container>
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="qntdEstoque">
+    <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+    <td mat-cell *matCellDef="let element"> {{element.qntdEstoque}} </td>
+  </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-<!-- </ng-container> -->
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="valor">
+    <th mat-header-cell *matHeaderCellDef> Valor </th>
+    <td mat-cell *matCellDef="let element"> {{element.valor | currency: 'BRL':'symbol'}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="5">No data matching the filter "{{input.value}}"</td>
+  </tr>
+</table>
+
 
 
 
