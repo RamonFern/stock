@@ -17,6 +17,8 @@ import { GerenciarComponent } from './gerenciar/gerenciar.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CadastroProdutosComponent } from './gerenciar/dialogs/cadastro-produtos/cadastro-produtos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { VendaComponent } from './venda/venda.component';
+import { CriarVendaComponent } from './venda/dialogs/criar-venda/criar-venda.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       LayoutComponent,
       DashboardComponent,
       GerenciarComponent,
-      CadastroProdutosComponent
+      CadastroProdutosComponent,
+      VendaComponent,
+      CriarVendaComponent
     ],
     imports: [
       CommonModule,

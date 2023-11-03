@@ -15,93 +15,14 @@ export class AppMenuConfig {
             icon: 'settings',
             link: 'gerenciar',
             // authService: this.authService,
-
-            // submenus: [
-            //     new MenuItem({
-            //         label: 'Pacientes',
-            //         icon: 'people',
-            //         link: 'app/atendimento/pacientes',
-            //         // permissao: PermissaoType.ACESSO_PAGINA_PACIENTES,
-            //         // authService: this.authService,
-            //     }),
-            //     new MenuItem({
-            //         label: 'Ocupação de salas',
-            //         icon: 'event_available',
-            //         link: 'app/atendimento/ocupacao-de-sala',
-            //         // permissao: PermissaoType.ACESSO_PAGINA_ROTINA_SALA,
-            //         // authService: this.authService,
-            //     }),
-            //     // TODO
-            //     // new MenuItem({
-            //     //     label: 'Mapa ocupação de salas',
-            //     //     icon: 'event_note',
-            //     //     link: 'app/atendimento/mapa-de-sala',
-            //     //     permissao: PermissaoType.ACESSO_PAGINA_MAPA_OCUPACAO_SALA,
-            //     //     authService: this.authService,
-            //     // }),
-            //     new MenuItem({
-            //         label: 'Presença',
-            //         icon: 'recommend',
-            //         link: 'app/atendimento/presenca',
-            //         // permissao: PermissaoType.ACESSO_PAGINA_PRESENCA,
-            //         // authService: this.authService,
-            //     }),
-            //     new MenuItem({
-            //         label: 'Serviços recorrentes',
-            //         icon: 'repeat',
-            //         link: 'app/atendimento/servicos-recorrentes',
-            //         // permissao: PermissaoType.ACESSO_PAGINA_ROTINA_SALA,
-            //         // authService: this.authService,
-            //     }),
-            //     new MenuItem({
-            //         label: 'Agenda',
-            //         icon: 'event',
-            //         link: '',
-            //         // authService: this.authService,
-            //     }),
-            //     new MenuItem({
-            //         label: 'Decisão Judicial',
-            //         icon: 'gavel',
-            //         link: '',
-            //         // authService: this.authService,
-            //     }),
-            //     new MenuItem({
-            //         label: 'Desconto Parceiro',
-            //         icon: 'local_offer',
-            //         link: '',
-            //         // authService: this.authService,
-            //     }),
-            // ],
         }),
         new MenuItem({
-            label: 'Fechamento',
-            icon: 'assignment',
-            link: '',
+            label: 'Vender',
+            icon: 'storefront',
+            link: 'vender',
             // authService: this.authService,
-            submenus: [
-                new MenuItem({
-                    label: 'Faturamento',
-                    icon: 'request_quote',
-                    link: 'app/fechamento/faturamento',
-                    // permissao: PermissaoType.ACESSO_PAGINA_FATURAMENTO,
-                    // authService: this.authService,
-                }),
-                new MenuItem({
-                    label: 'Repasse',
-                    icon: 'payments',
-                    link: 'app/fechamento/repasse',
-                    // permissao: PermissaoType.ACESSO_PAGINA_REPASSE,
-                    // authService: this.authService,
-                }),
-                new MenuItem({
-                    label: 'Pagamento Fixo',
-                    icon: 'credit_score',
-                    link: 'app/fechamento/pagamento-fixo',
-                    // permissao: PermissaoType.ACESSO_PAGINA_REPASSE,
-                    // authService: this.authService,
-                }),
-            ],
         }),
+
         new MenuItem({
             label: 'Pessoas',
             icon: 'peoples',
