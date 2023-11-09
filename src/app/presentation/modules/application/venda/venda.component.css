@@ -43,3 +43,171 @@
 .buttons {
   display: flex;
 }
+
+.table {
+  cursor: pointer;
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.field {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.main {
+  display: flex;
+}
+
+.dir__main {
+  width: 80%;
+}
+
+.todo {
+  display: flex;
+  justify-content: space-around;
+  /* background-color: lavender; */
+  width: 85%;
+}
+
+.esq {
+  display: flex;
+  width: 74%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.esq__inter {
+  width: 93%;
+  margin-top: 20px;
+  background-color: #fff0b8;
+  height: 100%;
+}
+
+input {
+  /* width: 100%;
+  height: 100%; */
+  background-color: white;
+}
+
+.meio {
+  display: flex;
+  width: 80%;
+  margin-top: 20px;
+  flex-direction: column;
+  margin-right: 5px;
+  margin-left: 5px;
+  background-color: lavender;
+  align-items: center;
+}
+
+.main__principal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.meio__main {
+  width: 95%;
+}
+
+.mat-form {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.dir {
+  display: flex;
+  width: 72%;
+  margin-top: 20px;
+  margin-left: 5px;
+  background-color: lavender;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-pesquisa {
+  display: flex;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: #3560F1;
+  color: white;
+  padding: 19px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.header__sub {
+  display: flex;
+  justify-content: space-around;
+  width: 85%;
+}
+
+.sub {
+  display: flex;
+  width: 31%;
+  border-radius: 50px;
+  background-color: cadetblue;
+  color: white;
+  padding: 6px;
+  justify-content: center;
+}
+
+.sub-meio {
+  display: flex;
+  width: 37%;
+  border-radius: 50px;
+  background-color: cadetblue;
+  color: white;
+  padding: 6px;
+  justify-content: center;
+}
+
+.totais {
+  display: flex;
+  border-radius: 50px;
+  background-color: cadetblue;
+  color: white;
+  padding: 6px;
+  justify-content: center;
+}
+
+.meio__input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 46px;
+}
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+
+.add-button {
+  width: 37%;
+}
