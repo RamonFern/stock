@@ -23,10 +23,10 @@
   </div>
   <div class="main__principal">
     <div class="header__sub">
-      <div class="sub">
+      <div class="sub" *ngIf="clickedRows.length">
         <span class="headline-4">NOTA</span>
       </div>
-      <div class="sub-meio">
+      <div class="sub-meio" *ngIf="finalizar">
         <span class="headline-4">PRODUTO</span>
       </div>
       <div class="sub">
@@ -34,18 +34,31 @@
       </div>
     </div>
     <div class="todo">
-      <div class="esq">
+      <div class="esq" *ngIf="clickedRows.length">
         <div class="esq__inter">
           NOTA
-          <div *ngFor="let item of clickedRows">
-            <span>{{item.nome}}, {{item.marca}}</span>
-            <span>{{item.valor}}</span>
-            <!-- <span>item.</span> -->
+          <div class="esq__inter-header">
+            <span class="body-2 cor-font">cod</span>
+            <span class="body-2 cor-font">Nome</span>
+            <span class="body-2 cor-font">unidade</span>
+            <span class="body-2 cor-font">qtd</span>
+            <span class="body-2 cor-font">total</span>
+        </div>
+          <div class="esq__inter-header" *ngFor="let item of clickedRows">
+            <span>{{item.idProduto}}</span>
+            <span>{{item.nomeproduto}}</span>
+            <span>{{item.valorunidade}}</span>
+            <span>{{item.quantidade}}</span>
+            <span>{{item.total}}</span>
+          </div>
+          <div>
+            <button mat-stroked-button (click)="finalizarCancelarVenda()" color="primary" *ngIf="finalizar">Finalizar</button>
+            <button mat-stroked-button (click)="finalizarCancelarVenda()" color="warn" *ngIf="!finalizar">Adicionar produto</button>
           </div>
         </div>
 
       </div>
-      <div class="meio">
+      <div class="meio" *ngIf="finalizar">
         <div class="meio__main">
           <form [formGroup]="formPesquisa" class="mat-elevation-z2 field" *ngIf="!produto || produto?.id === 0">
             <!-- <mat-form-field appearance="outline" class="form-field" *ngIf="!produto"> -->
@@ -105,8 +118,12 @@
           </table>
 
           <!-- <form [formGroup]="form" *ngIf="produto"> -->
-          <form [formGroup]="form" *ngIf="produto">
+          <form [formGroup]="form" *ngIf="produto && produto?.id !== 0">
             <div class="meio__input">
+              <mat-label>COD PRODUTO</mat-label>
+              <mat-form-field appearance="outline">
+                <input matInput type="number" name="id" formControlName="id" required />
+              </mat-form-field>
               <mat-label>DESCRIÇÃO DO PRODUTO</mat-label>
               <mat-form-field appearance="outline">
                 <input matInput type="text" name="descricao" formControlName="descricao" required />
@@ -125,15 +142,23 @@
               </mat-form-field>
             </div>
             <div class="example-button-row">
-              <button mat-fab class="add-button" (click)="enviarParaNota()" color="primary">
+              <!-- <button mat-fab class="add-button"  color="primary">
+                <mat-icon>done</mat-icon>
+                adicionar na nota
+              </button> -->
+              <button mat-raised-button (click)="enviarParaNota()">
                 <mat-icon>done</mat-icon>
                 adicionar na nota
               </button>
 
-              <button mat-fab class="add-button" (click)="zerarProduto()" extended color="warn">
+              <button mat-raised-button (click)="zerarProduto()" color="accent">
                 <mat-icon>close</mat-icon>
                 remover
               </button>
+              <!-- <button mat-fab class="add-button" (click)="zerarProduto()" extended color="warn">
+                <mat-icon>close</mat-icon>
+                remover
+              </button> -->
             </div>
           </form>
         </div>
@@ -144,35 +169,35 @@
         </ul> -->
       </div>
       <div class="dir">
-        <div class="dir__main">
+        <form [formGroup]="formTotais" class="dir__main">
           <mat-form-field appearance="outline" class="mat-form">
-            <input matInput type="text" name="nome" required />
+            <input matInput type="number" name="totalGeral" formControlName="totalGeral" required />
           </mat-form-field>
           <div class="totais">
             <span class="headline-4">DESCONTO</span>
           </div>
           <mat-form-field appearance="outline" class="mat-form">
-            <input matInput type="text" name="nome" required />
+            <input matInput type="number" name="desconto" formControlName="desconto"  required />
           </mat-form-field>
           <div class="totais">
             <span class="headline-4">SUB-TOTAL</span>
           </div>
           <mat-form-field appearance="outline" class="mat-form">
-            <input matInput type="text" name="nome" required />
+            <input matInput type="number" name="subtotal" formControlName="subtotal" required />
           </mat-form-field>
           <div class="totais">
             <span class="headline-4">VALOR RECEBIDO</span>
           </div>
           <mat-form-field appearance="outline" class="mat-form">
-            <input matInput type="text" name="nome" required />
+            <input matInput type="number" name="valorRecebido" formControlName="valorRecebido" required />
           </mat-form-field>
           <div class="totais">
             <span class="headline-4">TROCO</span>
           </div>
           <mat-form-field appearance="outline" class="mat-form">
-            <input matInput type="text" name="nome" required />
+            <input matInput type="number" name="troco" formControlName="troco" required />
           </mat-form-field>
-        </div>
+        </form>
       </div>
     </div>
 
