@@ -50,6 +50,7 @@ export class VendaComponent implements OnInit {
 
                 this.form = this.fb.group({
                   id: new FormControl(0, Validators.required),
+                  numeronota: new FormControl(0, Validators.required),
                   descricao: new FormControl('', Validators.required),
                   quantidade : new FormControl(0, Validators.required),
                   preco: new FormControl(0, Validators.required),
@@ -88,24 +89,26 @@ export class VendaComponent implements OnInit {
 
   addProdutoNaNota(prod: ProdutoResponse) {
     this.produto = prod;
-    console.log(prod);
+    // console.log(prod);
     const desc = this.produto.nome +', '+ this.produto.marca;
     this.form.controls['id'].setValue(this.produto.id);
+    this.form.controls['numeronota'].setValue(1111);
     this.form.controls['descricao'].setValue(desc);
     this.form.controls['quantidade'].setValue(1);
     this.form.controls['preco'].setValue(this.produto.valor);
     // const total = prod.qntdEstoque * prod.valor;
     this.form.controls['total'].setValue(this.produto.valor);
-    console.log(this.form);
+    // console.log(this.form);
     this.removerObjeto(prod, this.produtos);
     this.dataSource.data = this.produtos;
-    this.produto
+    // this.produto
     // console.log(event);
   }
 
   enviarParaNota() {
-    console.log(this.form);
+    // console.log(this.form);
     const vendaRequest: CreateVendaRequest = {
+      numeronota: this.form.controls['numeronota'].value,
       idProduto: this.form.controls['id'].value,
       nomeproduto: this.form.controls['descricao'].value,
       valorunidade: this.form.controls['preco'].value,
