@@ -52,8 +52,12 @@
             <span>{{item.total}}</span>
           </div>
           <div>
-            <button mat-stroked-button (click)="finalizarCancelarVenda()" color="primary" *ngIf="finalizar">Finalizar</button>
-            <button mat-stroked-button (click)="finalizarCancelarVenda()" color="warn" *ngIf="!finalizar">Adicionar produto</button>
+            <button mat-stroked-button (click)="finalizarCancelarVenda()" color="primary" *ngIf="finalizar">Próximo</button>
+            <ng-container *ngIf="!finalizar">
+              <button mat-stroked-button (click)="finalizarCancelarVenda()" color="warn">Adicionar + produto na nota</button>
+              <button mat-stroked-button color="primary">Finalizar venda</button>
+            </ng-container>
+
           </div>
         </div>
 
@@ -121,9 +125,9 @@
           <form [formGroup]="form" *ngIf="produto && produto?.id !== 0">
             <div class="meio__input">
               <mat-label>COD PRODUTO</mat-label>
-              <mat-form-field appearance="outline">
-                <input matInput type="number" name="id" formControlName="id" required />
-              </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <input matInput type="number" name="id" formControlName="id" required />
+                </mat-form-field>
               <mat-label>DESCRIÇÃO DO PRODUTO</mat-label>
               <mat-form-field appearance="outline">
                 <input matInput type="text" name="descricao" formControlName="descricao" required />
@@ -174,25 +178,25 @@
             <input matInput type="number" name="totalGeral" formControlName="totalGeral" required />
           </mat-form-field>
           <div class="totais">
-            <span class="headline-4">DESCONTO</span>
+            <span class="headline-6">DESCONTO</span>
           </div>
           <mat-form-field appearance="outline" class="mat-form">
             <input matInput type="number" name="desconto" formControlName="desconto"  required />
           </mat-form-field>
           <div class="totais">
-            <span class="headline-4">SUB-TOTAL</span>
+            <span class="headline-6">SUB-TOTAL</span>
           </div>
           <mat-form-field appearance="outline" class="mat-form">
             <input matInput type="number" name="subtotal" formControlName="subtotal" required />
           </mat-form-field>
           <div class="totais">
-            <span class="headline-4">VALOR RECEBIDO</span>
+            <span class="headline-6">VALOR RECEBIDO</span>
           </div>
           <mat-form-field appearance="outline" class="mat-form">
             <input matInput type="number" name="valorRecebido" formControlName="valorRecebido" required />
           </mat-form-field>
           <div class="totais">
-            <span class="headline-4">TROCO</span>
+            <span class="headline-6">TROCO</span>
           </div>
           <mat-form-field appearance="outline" class="mat-form">
             <input matInput type="number" name="troco" formControlName="troco" required />

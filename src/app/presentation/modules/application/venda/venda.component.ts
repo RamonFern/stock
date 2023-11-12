@@ -68,6 +68,10 @@ export class VendaComponent implements OnInit {
                   this.total = this.somarTotais(this.clickedRows);
                   this.formTotais.get('totalGeral')?.setValue(this.total);
 
+                  this.form.get('id')?.disable();
+                  // this.form.get('preco')?.disable();
+                  // this.form.get('total')?.disable();
+                  this.form.get('descricao')?.disable();
                 })
               }
 

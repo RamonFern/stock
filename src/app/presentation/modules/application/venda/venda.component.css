@@ -87,7 +87,7 @@
 
 .esq__inter {
   width: 93%;
-  margin-top: 20px;
+  margin-top: 10px;
   background-color: #fff0b8;
   height: 100%;
 }
@@ -111,7 +111,8 @@ input {
 .meio {
   display: flex;
   width: 80%;
-  margin-top: 20px;
+  font-size: 20px;
+  margin-top: 10px;
   flex-direction: column;
   margin-right: 5px;
   margin-left: 5px;
@@ -137,7 +138,8 @@ input {
 .dir {
   display: flex;
   width: 72%;
-  margin-top: 20px;
+  font-size: 20px;
+  margin-top: 10px;
   margin-left: 5px;
   background-color: lavender;
   flex-direction: column;
@@ -169,7 +171,7 @@ input {
   color: white;
   padding: 19px;
   justify-content: center;
-  margin-bottom: 40px;
+  margin-bottom: 15px;
 }
 
 .header__sub {
@@ -201,9 +203,9 @@ input {
 .totais {
   display: flex;
   border-radius: 50px;
-  background-color: cadetblue;
+  background-color: darkgrey;
   color: white;
-  padding: 6px;
+  /* padding: 6px; */
   justify-content: center;
 }
 
