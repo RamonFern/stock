@@ -50,7 +50,7 @@
         <button mat-stroked-button (click)="proximo()" color="primary" *ngIf="finalizar">Próximo</button>
         <ng-container *ngIf="!finalizar">
           <button mat-stroked-button (click)="finalizarCancelarVenda()" color="warn">Adicionar + produto na nota</button>
-          <button mat-stroked-button color="primary">Finalizar venda</button>
+          <button mat-stroked-button (click)="fecharVenda()" color="primary">Finalizar venda</button>
         </ng-container>
       </div>
 

@@ -9,6 +9,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { CreateVendaRequest } from 'src/app/domain/api/application/venda/request/venda-request';
 import { DialogReturn } from 'src/app/shared/models/dialog-return';
 import { AumentarQuantidadeComponent } from './dialogs/aumentar-quantidade/aumentar-quantidade.component';
+import { VendaService } from 'src/app/domain/api/application/venda/service/venda.service';
 
 @Component({
   selector: 'app-venda',
@@ -39,6 +40,7 @@ export class VendaComponent implements OnInit {
   // dataHora: moment()
 
   constructor(private produtoService: ProdutoService,
+              private vendaService: VendaService,
               public dialog: MatDialog, private fb: FormBuilder) {
                 this.formPesquisa = this.fb.group({
                   pesquisa: new FormControl(''),
@@ -58,7 +60,7 @@ export class VendaComponent implements OnInit {
 
                 this.formTotais.valueChanges
                   .pipe(
-                    debounceTime(800))
+                    debounceTime(500))
                   .subscribe((values) => {
                     const valorRecebido = values.valorRecebido;
                     const total = values.totalGeral;
@@ -91,6 +93,25 @@ export class VendaComponent implements OnInit {
 
   ngOnInit() {
     this.buscarProdutos();
+    this.buscarVendas();
+  }
+
+  salvarVenda() {
+    this.clickedRows.forEach((venda) => {
+      this.vendaService.createVenda(venda)
+          .pipe(take(1))
+          .subscribe((v) => {
+            console.log(v);
+          })
+    })
+  }
+
+  buscarVendas() {
+    this.vendaService.listAll()
+        .pipe(take(1))
+        .subscribe((v) => {
+          console.log(v);
+        })
   }
 
   somarTotais(lista: CreateVendaRequest[]): number {
@@ -111,32 +132,32 @@ export class VendaComponent implements OnInit {
   }
 
   addProdutoNaNota(prod: ProdutoResponse) {
-        this.produto = prod;
-        var vendas = this.clickedRows.filter((v) => v.idProduto === this.produto.id)
-        if(vendas.length) {
-          const dialogRef = this.dialog.open(AumentarQuantidadeComponent, {
-            width: '450px',
-            data: vendas[0],
-          });
+    this.produto = prod;
+    var vendas = this.clickedRows.filter((v) => v.idProduto === this.produto.id)
+    if(vendas.length) {
+      const dialogRef = this.dialog.open(AumentarQuantidadeComponent, {
+        width: '450px',
+        data: vendas[0],
+      });
 
-          dialogRef.afterClosed().subscribe((dialogReturn: DialogReturn) => {
-            if (dialogReturn?.hasDataChanged) {
-              this.qtd.nativeElement.focus();
-              this.form.controls['quantidade'].setValue(dialogReturn.dataChanged.quantidade)
-              this.zerarProduto();
-            }
-          });
+      dialogRef.afterClosed().subscribe((dialogReturn: DialogReturn) => {
+        if (dialogReturn?.hasDataChanged) {
+          this.qtd.nativeElement.focus();
+          this.form.controls['quantidade'].setValue(dialogReturn.dataChanged.quantidade)
+          this.zerarProduto();
         }
+      });
+    }
 
-        const desc = this.produto.nome +', '+ this.produto.marca;
-        this.form.controls['id'].setValue(this.produto.id);
-        this.form.controls['numeronota'].setValue(1111);
-        this.form.controls['descricao'].setValue(desc);
-        this.form.controls['quantidade'].setValue(1);
-        this.form.controls['preco'].setValue(this.produto.valor);
-        this.form.controls['total'].setValue(this.produto.valor);
-        this.removerObjeto(prod, this.produtos);
-        this.dataSource.data = this.produtos;
+    const desc = this.produto.nome +', '+ this.produto.marca;
+    this.form.controls['id'].setValue(this.produto.id);
+    this.form.controls['numeronota'].setValue(1111);
+    this.form.controls['descricao'].setValue(desc);
+    this.form.controls['quantidade'].setValue(1);
+    this.form.controls['preco'].setValue(this.produto.valor);
+    this.form.controls['total'].setValue(this.produto.valor);
+    this.removerObjeto(prod, this.produtos);
+    this.dataSource.data = this.produtos;
   }
 
   enviarParaNota() {
@@ -150,10 +171,17 @@ export class VendaComponent implements OnInit {
       total: this.form.controls['total'].value,
       status: 'PENDENTE',
       formaPag: 'DINHEIRO',
-      dataVenda: moment().locale('pt').toLocaleString(),
+      dataVenda: '2023-10-27T10:15:30+01:00',
+      // dataVenda: moment().locale('pt').toLocaleString(),
     }
     this.clickedRows.push(vendaRequest);
     this.zerarProduto();
+    // PENSAR EM LÓGICA PARA DIMINUIR QUANT DE PRODUTOS COMFORME VENDA MANUTENÇÃO NO ESTOQUE
+  }
+
+  fecharVenda() {
+    this.salvarVenda();
+    // console.log(this.clickedRows);
   }
 
   zerarProduto() {
