@@ -3,7 +3,7 @@ export interface VendaResponse {
   numeronota: number
 	idProduto: number
 	nomeproduto: string
-	valorunidade: string
+	valorunidade: number
 	quantidade: number
 	desconto: number
 	total: number

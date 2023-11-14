@@ -47,7 +47,7 @@
         </div>
       </div>
       <div>
-        <button mat-stroked-button (click)="finalizarCancelarVenda()" color="primary" *ngIf="finalizar">Próximo</button>
+        <button mat-stroked-button (click)="proximo()" color="primary" *ngIf="finalizar">Próximo</button>
         <ng-container *ngIf="!finalizar">
           <button mat-stroked-button (click)="finalizarCancelarVenda()" color="warn">Adicionar + produto na nota</button>
           <button mat-stroked-button color="primary">Finalizar venda</button>
@@ -180,7 +180,7 @@
             <span class="headline-6">VALOR RECEBIDO</span>
           </div>
           <mat-form-field appearance="outline" class="mat-form">
-            <input matInput type="number" name="valorRecebido" formControlName="valorRecebido" required />
+            <input matInput #valorRecebido type="number" name="valorRecebido" formControlName="valorRecebido" required />
           </mat-form-field>
           <div class="totais">
             <span class="headline-6">TROCO</span>

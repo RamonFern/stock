@@ -1,13 +1,17 @@
 <h1>
   Este produto já está na nota, deseja aumentar a quantidade?
   <button mat-button (click)="sim()" color="primary">SIM</button>
-  <button mat-button color="warn">NÃO</button>
+  <button mat-button mat-dialog-close color="warn">NÃO</button>
 </h1>
 <div *ngIf="respostaSim">
   <form [formGroup]="formQuantidade">
-    <mat-label>QUANTIDADE</mat-label>
     <mat-form-field appearance="outline">
-      <input matInputtype="number" name="quantidade" formControlName="quantidade" required />
+      <mat-label>QUANTIDADE</mat-label>
+      <input matInput type="number" name="quantidade" formControlName="quantidade" required />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>TOTAL</mat-label>
+      <input matInput type="number" name="total" formControlName="total" required />
     </mat-form-field>
   </form>
   <button mat-button (click)="enviar()" color="primary">enviar</button>

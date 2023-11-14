@@ -27,6 +27,7 @@ export class VendaComponent implements OnInit {
 
   @ViewChild('input') input!: ElementRef;
   @ViewChild('qtd') qtd!: ElementRef;
+  @ViewChild('valorRecebido') valorRecebido!: ElementRef;
 
   botoes = true;
   finalizar = true;
@@ -55,6 +56,16 @@ export class VendaComponent implements OnInit {
                 this.formTotais.get('subtotal')?.disable();
                 this.formTotais.get('troco')?.disable();
 
+                this.formTotais.valueChanges
+                  .pipe(
+                    debounceTime(800))
+                  .subscribe((values) => {
+                    const valorRecebido = values.valorRecebido;
+                    const total = values.totalGeral;
+                    this.formTotais.get('troco')?.setValue(valorRecebido - total);
+                    //this.form.get('total')?.setValue(quantidade * preco);
+                  })
+
                 this.form = this.fb.group({
                   id: new FormControl(0, Validators.required),
                   numeronota: new FormControl(0, Validators.required),
@@ -70,14 +81,10 @@ export class VendaComponent implements OnInit {
                   .subscribe((values) => {
                   const quantidade = values.quantidade;
                   const preco = values.preco;
-
                   this.form.get('total')?.setValue(quantidade * preco);
                   this.total = this.somarTotais(this.clickedRows);
                   this.formTotais.get('totalGeral')?.setValue(this.total);
-
                   this.form.get('id')?.disable();
-                  // this.form.get('preco')?.disable();
-                  // this.form.get('total')?.disable();
                   this.form.get('descricao')?.disable();
                 })
               }
@@ -94,6 +101,11 @@ export class VendaComponent implements OnInit {
     this.finalizar = !this.finalizar;
   }
 
+  proximo() {
+    this.finalizar = !this.finalizar;
+    this.valorRecebido.nativeElement.focus();
+  }
+
   criarVenda() {
     this.botoes = !this.botoes;
   }
@@ -104,17 +116,18 @@ export class VendaComponent implements OnInit {
         if(vendas.length) {
           const dialogRef = this.dialog.open(AumentarQuantidadeComponent, {
             width: '450px',
-            data: vendas[0],//CONTINUAR RESOLVENDO AQUI ENVIA OU NÃO A VENDA PARA O DIALOG
+            data: vendas[0],
           });
 
           dialogRef.afterClosed().subscribe((dialogReturn: DialogReturn) => {
             if (dialogReturn?.hasDataChanged) {
               this.qtd.nativeElement.focus();
+              this.form.controls['quantidade'].setValue(dialogReturn.dataChanged.quantidade)
+              this.zerarProduto();
             }
           });
         }
 
-        console.log(vendas);
         const desc = this.produto.nome +', '+ this.produto.marca;
         this.form.controls['id'].setValue(this.produto.id);
         this.form.controls['numeronota'].setValue(1111);
@@ -124,14 +137,9 @@ export class VendaComponent implements OnInit {
         this.form.controls['total'].setValue(this.produto.valor);
         this.removerObjeto(prod, this.produtos);
         this.dataSource.data = this.produtos;
-      //}
-   // })
-    // this.produto
-    // console.log(event);
   }
 
   enviarParaNota() {
-    // console.log(this.form);
     const vendaRequest: CreateVendaRequest = {
       numeronota: this.form.controls['numeronota'].value,
       idProduto: this.form.controls['id'].value,
@@ -144,14 +152,11 @@ export class VendaComponent implements OnInit {
       formaPag: 'DINHEIRO',
       dataVenda: moment().locale('pt').toLocaleString(),
     }
-    console.log(vendaRequest);
     this.clickedRows.push(vendaRequest);
     this.zerarProduto();
-    // this.clearInput();
   }
 
   zerarProduto() {
-    // this.formPesquisa.controls['pesquisa'].setValue('');
     const valorPadraoProduto: ProdutoResponse = {
       id: 0,
       nome: '',
@@ -173,8 +178,6 @@ export class VendaComponent implements OnInit {
       })
     })
     this.dataSource.data = this.produtos;
-    console.log(this.clickedRows);
-    console.log(this.produtos);
   }
 
   removerObjeto(produto: ProdutoResponse, produtos: ProdutoResponse[]) {
@@ -187,7 +190,6 @@ export class VendaComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
   }
 
   buscarProdutos() {
