@@ -22,49 +22,48 @@
     <span class="headline-4">Caixa - ABERTO</span>
   </div>
   <div class="main__principal">
-    <div class="header__sub">
-      <div class="sub" *ngIf="clickedRows.length">
-        <span class="headline-4">NOTA</span>
-      </div>
-      <div class="sub-meio" *ngIf="finalizar">
-        <span class="headline-4">PRODUTO</span>
-      </div>
-      <div class="sub">
-        <span class="headline-4">TOTAL</span>
-      </div>
-    </div>
     <div class="todo">
       <div class="esq" *ngIf="clickedRows.length">
+        <div class="header__sub">
+          <div class="sub">
+            <span class="headline-4">NOTA</span>
+          </div>
+        </div>
         <div class="esq__inter">
           NOTA
           <div class="esq__inter-header">
-            <span class="body-2 cor-font">cod</span>
-            <span class="body-2 cor-font">Nome</span>
-            <span class="body-2 cor-font">unidade</span>
-            <span class="body-2 cor-font">qtd</span>
-            <span class="body-2 cor-font">total</span>
+            <span class="body-2">cod</span>
+            <span class="body-2">Nome</span>
+            <span class="body-2">unidade</span>
+            <span class="body-2">qtd</span>
+            <span class="body-2">total</span>
         </div>
-          <div class="esq__inter-header" *ngFor="let item of clickedRows">
-            <span>{{item.idProduto}}</span>
-            <span>{{item.nomeproduto}}</span>
-            <span>{{item.valorunidade}}</span>
-            <span>{{item.quantidade}}</span>
-            <span>{{item.total}}</span>
-          </div>
-          <div>
-            <button mat-stroked-button (click)="finalizarCancelarVenda()" color="primary" *ngIf="finalizar">Próximo</button>
-            <ng-container *ngIf="!finalizar">
-              <button mat-stroked-button (click)="finalizarCancelarVenda()" color="warn">Adicionar + produto na nota</button>
-              <button mat-stroked-button color="primary">Finalizar venda</button>
-            </ng-container>
-
-          </div>
+        <div class="esq__inter-header" *ngFor="let item of clickedRows">
+          <span>{{item.idProduto}}</span>
+          <span>{{item.nomeproduto}}</span>
+          <span>{{item.valorunidade}}</span>
+          <span>{{item.quantidade}}</span>
+          <span>{{item.total}}</span>
         </div>
-
       </div>
-      <div class="meio" *ngIf="finalizar">
+      <div>
+        <button mat-stroked-button (click)="finalizarCancelarVenda()" color="primary" *ngIf="finalizar">Próximo</button>
+        <ng-container *ngIf="!finalizar">
+          <button mat-stroked-button (click)="finalizarCancelarVenda()" color="warn">Adicionar + produto na nota</button>
+          <button mat-stroked-button color="primary">Finalizar venda</button>
+        </ng-container>
+      </div>
+
+    </div>
+    <div class="meio" *ngIf="finalizar">
+      <div class="header__sub">
+        <div class="sub-meio">
+          <span class="headline-4">PRODUTO</span>
+        </div>
+      </div>
+      <div class="meio__dois">
         <div class="meio__main">
-          <form [formGroup]="formPesquisa" class="mat-elevation-z2 field" *ngIf="!produto || produto?.id === 0">
+          <form [formGroup]="formPesquisa" class="mat-elevation-z8 field" *ngIf="!produto || produto?.id === 0">
             <!-- <mat-form-field appearance="outline" class="form-field" *ngIf="!produto"> -->
             <mat-form-field appearance="outline" class="form-field">
               <mat-label>Buscar produto</mat-label>
@@ -77,9 +76,7 @@
                 </mat-icon>
               </div>
             </mat-form-field>
-            <!-- <button mat-stroked-button color="warn" (click)="clearInput()">Limpar</button> -->
           </form>
-
           <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table" *ngIf="dataSource.filter.length && !produto"> -->
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table" *ngIf="dataSource.filter.length && !produto || produto?.id === 0">
             <ng-container matColumnDef="id">
@@ -109,19 +106,15 @@
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr
-            mat-row
-            (click)="addProdutoNaNota(row)"
-            *matRowDef="let row; columns: displayedColumns;"
+              mat-row
+              (click)="addProdutoNaNota(row)"
+              *matRowDef="let row; columns: displayedColumns;"
             ></tr>
-            <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
-
             <tr class="mat-row" *matNoDataRow>
-              <!-- <td class="mat-cell" colspan="5">Não foi encontrado o produto "{{input.value}}"</td> -->
               <td class="mat-cell" colspan="5">Não foi encontrado o produto!</td>
             </tr>
           </table>
 
-          <!-- <form [formGroup]="form" *ngIf="produto"> -->
           <form [formGroup]="form" *ngIf="produto && produto?.id !== 0">
             <div class="meio__input">
               <mat-label>COD PRODUTO</mat-label>
@@ -134,7 +127,7 @@
               </mat-form-field>
               <mat-label>QUANTIDADE</mat-label>
               <mat-form-field appearance="outline">
-                <input matInput type="number" name="quantidade" formControlName="quantidade" required />
+                <input matInput #qtd type="number" name="quantidade" formControlName="quantidade" required />
               </mat-form-field>
               <mat-label>PREÇO UNITÁRIO</mat-label>
               <mat-form-field appearance="outline">
@@ -145,32 +138,26 @@
                 <input matInput type="number" name="total" formControlName="total" required />
               </mat-form-field>
             </div>
-            <div class="example-button-row">
-              <!-- <button mat-fab class="add-button"  color="primary">
-                <mat-icon>done</mat-icon>
-                adicionar na nota
-              </button> -->
-              <button mat-raised-button (click)="enviarParaNota()">
-                <mat-icon>done</mat-icon>
-                adicionar na nota
-              </button>
-
-              <button mat-raised-button (click)="zerarProduto()" color="accent">
-                <mat-icon>close</mat-icon>
-                remover
-              </button>
-              <!-- <button mat-fab class="add-button" (click)="zerarProduto()" extended color="warn">
-                <mat-icon>close</mat-icon>
-                remover
-              </button> -->
-            </div>
           </form>
+          <div class="example-button-row" *ngIf="produto && produto?.id !== 0">
+            <button mat-raised-button (click)="enviarParaNota()">
+              <mat-icon>done</mat-icon>
+              adicionar na nota
+            </button>
+
+            <button mat-raised-button (click)="zerarProduto()" color="accent">
+              <mat-icon>close</mat-icon>
+              remover
+            </button>
+          </div>
         </div>
-        <!-- <ul>
-          <li *ngFor="let clickedRow of clickedRows">
-            Clicked on {{clickedRow.nome}}
-          </li>
-        </ul> -->
+      </div>
+    </div>
+    <div class="dir__princ">
+      <div class="header__sub-dir">
+        <div class="sub">
+          <span class="headline-4">TOTAL</span>
+        </div>
       </div>
       <div class="dir">
         <form [formGroup]="formTotais" class="dir__main">
@@ -203,6 +190,7 @@
           </mat-form-field>
         </form>
       </div>
+    </div>
     </div>
 
   </div>

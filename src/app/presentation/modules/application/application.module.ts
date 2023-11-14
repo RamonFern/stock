@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CadastroProdutosComponent } from './gerenciar/dialogs/cadastro-produtos/cadastro-produtos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VendaComponent } from './venda/venda.component';
+import { AumentarQuantidadeComponent } from './venda/dialogs/aumentar-quantidade/aumentar-quantidade.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { VendaComponent } from './venda/venda.component';
       DashboardComponent,
       GerenciarComponent,
       CadastroProdutosComponent,
-      VendaComponent
+      VendaComponent,
+      AumentarQuantidadeComponent
     ],
     imports: [
       CommonModule,
