@@ -11,6 +11,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { GerenciarComponent } from './gerenciar/gerenciar.component';
@@ -37,8 +39,10 @@ import { AumentarQuantidadeComponent } from './venda/dialogs/aumentar-quantidade
       MatOptionModule,
       FormsModule,
       ReactiveFormsModule,
+      MatProgressSpinnerModule,
       MatDialogModule,
       MatTableModule,
+      MatExpansionModule,
       MatButtonModule,
       MatFormFieldModule,
       MatOptionModule,

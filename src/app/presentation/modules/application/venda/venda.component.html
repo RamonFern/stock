@@ -1,20 +1,39 @@
-<div class="buttons" *ngIf="botoes">
-  <div class="tabs__nav-bar" #navbar (click)="criarVenda()">
-    <a  class="tab-label mat-elevation-z8">
-      <mat-icon class="nav__icon">
-        sell
-      </mat-icon>
-      <span class="headline-4 tab-label__title">Vender</span>
-    </a>
+<div *ngIf="botoes" class="but">
+  <div class="buttons">
+    <div class="tabs__nav-bar" #navbar (click)="criarVenda()">
+      <a  class="tab-label mat-elevation-z8">
+        <mat-icon class="nav__icon">
+          sell
+        </mat-icon>
+        <span class="headline-4 tab-label__title">Vender</span>
+      </a>
+    </div>
+    <div class="tabs__nav-bar" #navbar>
+      <a  class="tab-label mat-elevation-z8">
+        <mat-icon class="nav__icon">
+          sell
+        </mat-icon>
+        <span class="headline-4 tab-label__title">Simular Venda</span>
+      </a>
+    </div>
   </div>
-  <div class="tabs__nav-bar" #navbar>
-    <a  class="tab-label mat-elevation-z8">
-      <mat-icon class="nav__icon">
-        sell
-      </mat-icon>
-      <span class="headline-4 tab-label__title">Simular Venda</span>
-    </a>
-  </div>
+
+  <mat-accordion>
+    <ng-container *ngFor="let venda of vendas">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            nº nota: {{venda.numeronota}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{ venda.dataVenda }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>{{ venda.total | currency: 'BRL':'symbol'}}</p>
+      </mat-expansion-panel>
+    </ng-container>
+  </mat-accordion>
+
 </div>
 
 <div *ngIf="!botoes">
@@ -22,6 +41,9 @@
     <span class="headline-4">Caixa - ABERTO</span>
   </div>
   <div class="main__principal">
+    <!-- <ng-container *ngIf="!botoes">
+      <mat-spinner></mat-spinner>
+    </ng-container> -->
     <div class="todo">
       <div class="esq" *ngIf="clickedRows.length">
         <div class="header__sub">
@@ -30,7 +52,14 @@
           </div>
         </div>
         <div class="esq__inter">
-          NOTA
+          <span class="body-2">-----------------------------------------------------------------------------------------------</span>
+          <span class="body-2">Comércio:  Nunes Cimento</span>
+          <span class="body-2">Endereço: Rua Estefânio Saldanha, Rosário</span>
+          <span class="body-2">Telefone:  989 8999-2112</span>
+          <span class="body-2">CNPJ:  23.423.324/0001-23</span>
+          <span class="body-2">-----------------------------------------------------------------------------------------------</span>
+          <span class="body-2">NOTA SEM VALOR FISCAL</span>
+          <span class="body-2">-----------------------------------------------------------------------------------------------</span>
           <div class="esq__inter-header">
             <span class="body-2">cod</span>
             <span class="body-2">Nome</span>
@@ -38,12 +67,18 @@
             <span class="body-2">qtd</span>
             <span class="body-2">total</span>
         </div>
+        <span class="body-2">------------------------------------------------------------------------------------------------</span>
         <div class="esq__inter-header" *ngFor="let item of clickedRows">
           <span>{{item.idProduto}}</span>
           <span>{{item.nomeproduto}}</span>
           <span>{{item.valorunidade}}</span>
           <span>{{item.quantidade}}</span>
           <span>{{item.total}}</span>
+        </div>
+        <span class="body-2">------------------------------------------------------------------------------------------------</span>
+        <div class="total__nota">
+          <span class="headline-4">TOTAL : </span>
+          <span class="headline-4">{{ total | currency: 'BRL':'symbol' }}</span>
         </div>
       </div>
       <div>

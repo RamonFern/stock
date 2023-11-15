@@ -1,3 +1,4 @@
+import { VendaResponse } from 'src/app/domain/api/application/venda/response/venda-response';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -36,6 +37,8 @@ export class VendaComponent implements OnInit {
   form: FormGroup;
   formTotais: FormGroup;
   total!: number;
+  panelOpenState = false;
+  vendas: VendaResponse[] = []
 
   // dataHora: moment()
 
@@ -101,7 +104,7 @@ export class VendaComponent implements OnInit {
       this.vendaService.createVenda(venda)
           .pipe(take(1))
           .subscribe((v) => {
-            console.log(v);
+            // console.log(v);
           })
     })
   }
@@ -110,7 +113,8 @@ export class VendaComponent implements OnInit {
     this.vendaService.listAll()
         .pipe(take(1))
         .subscribe((v) => {
-          console.log(v);
+          this.vendas = v;
+          // console.log(v);
         })
   }
 
@@ -171,7 +175,7 @@ export class VendaComponent implements OnInit {
       total: this.form.controls['total'].value,
       status: 'PENDENTE',
       formaPag: 'DINHEIRO',
-      dataVenda: '2023-10-27T10:15:30+01:00',
+      // dataVenda: '2023-10-27T10:15:30+01:00',
       // dataVenda: moment().locale('pt').toLocaleString(),
     }
     this.clickedRows.push(vendaRequest);
@@ -180,7 +184,16 @@ export class VendaComponent implements OnInit {
   }
 
   fecharVenda() {
+    // this.botoes = !this.botoes;
     this.salvarVenda();
+    this.form.reset();
+    this.formTotais.reset();
+    this.formPesquisa.reset();
+    this.clickedRows = [];
+    this.produtos = [];
+    this.buscarProdutos();
+    this.finalizar = !this.finalizar;
+    this.botoes = !this.botoes;
     // console.log(this.clickedRows);
   }
 

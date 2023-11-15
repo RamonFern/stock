@@ -86,12 +86,20 @@
   align-items: center;
 }
 
+.total__nota {
+  display: flex;
+}
+
 .esq__inter {
+  display: flex;
   width: 93%;
+  font-weight: 900;
   margin-top: 10px;
   background-color: #fff0b8;
   min-height: 80%;
   margin-bottom: 14px;
+  flex-direction: column;
+  align-items: center;
 }
 
 .esq__inter-header {

@@ -4,7 +4,6 @@ import { CadastroProdutosComponent } from './dialogs/cadastro-produtos/cadastro-
 import { MatDialog } from '@angular/material/dialog';
 import { ProdutoService } from 'src/app/domain/api/application/produto/service/produto.service';
 import { take } from 'rxjs';
-import { ProdutoResponse } from 'src/app/domain/api/application/produto/response/produto-response';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -32,9 +31,7 @@ export class GerenciarComponent implements OnInit {
     this.produtoService.listAll()
         .pipe(take(1))
         .subscribe((list) => {
-          this.dataSource.data = list
-          // this.table = true;
-          console.log(this.dataSource);
+          this.dataSource.data = list;
         })
   }
 

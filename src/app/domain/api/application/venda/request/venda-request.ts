@@ -8,5 +8,5 @@ export interface CreateVendaRequest {
 	total: number
 	status: string
   formaPag: string
-	dataVenda: string
+	// dataVenda: string
 }
