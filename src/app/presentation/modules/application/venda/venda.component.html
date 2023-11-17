@@ -181,7 +181,8 @@
               </mat-form-field>
               <mat-label>QUANTIDADE</mat-label>
               <mat-form-field appearance="outline">
-                <input matInput #qtd type="number" name="quantidade" maxlength="{{produto.qntdEstoque}}" formControlName="quantidade" required />
+                <input matInput #qtd type="number" name="quantidade" formControlName="quantidade" required max="{{produto.qntdEstoque}}" />
+                <mat-error *ngIf="form.get('quantidade')?.hasError('max')">A quantidade está maior que o estoque.  {{ produto.qntdEstoque }}.</mat-error>
               </mat-form-field>
               <mat-label>PREÇO UNITÁRIO</mat-label>
               <mat-form-field appearance="outline">

@@ -21,5 +21,13 @@ export class ProdutoService {
     return this.httpClient.get<ProdutoResponse[]>(`${this.baseUrl}api/produto`);
   }
 
+  buscarPorId(idProduto: number) {
+    return this.httpClient.get<ProdutoResponse>(`${this.baseUrl}api/produto/${idProduto}`);
+  }
+
+  update(produto: ProdutoResponse, id: number) {
+    return this.httpClient.put<ProdutoResponse>(`${this.baseUrl}api/produto/${id}`, produto);
+  }
+
 
 }

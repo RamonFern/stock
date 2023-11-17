@@ -108,9 +108,26 @@ export class VendaComponent implements OnInit {
           .pipe(take(1))
           .subscribe((v) => {
             // console.log(v);
+            this.buscarProdutoPorId(v)
           })
     })
     this.notification.open('Venda realizada com sucesso!', 'Sucesso', { duration: 3000 });
+  }
+
+  buscarProdutoPorId(venda: VendaResponse) {
+    this.produtoService.buscarPorId(venda.idProduto)
+        .pipe(take(1))
+        .subscribe((v) => {
+          v.qntdEstoque = v.qntdEstoque - venda.quantidade;
+          this.atualizarQntdStock(v, v.id);
+        })
+  }
+
+  atualizarQntdStock(vendido: ProdutoResponse, id: number) {
+    this.produtoService.update(vendido, id)
+        .pipe(take(1))
+        .subscribe(() => {})
+
   }
 
   buscarVendas() {
