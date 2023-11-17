@@ -86,6 +86,10 @@
   align-items: center;
 }
 
+.accordion {
+  margin-bottom: 10px;
+}
+
 .total__nota {
   display: flex;
 }

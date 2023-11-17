@@ -19,31 +19,51 @@
   </div>
 
   <mat-accordion>
-    <ng-container *ngFor="let venda of vendas">
+    <div *ngFor="let venda of vendasFiltradas" class="accordion">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
             nº nota: {{venda.numeronota}}
           </mat-panel-title>
           <mat-panel-description>
-            {{ venda.dataVenda }}
+            valor da nota: {{ venda.totalGeral | currency: 'BRL':'symbol' }}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>{{ venda.total | currency: 'BRL':'symbol'}}</p>
+        <div class="esq__inter-header">
+          <span class="body-2">cod</span>
+          <span class="body-2">Nome</span>
+          <span class="body-2">unidade</span>
+          <span class="body-2">qtd</span>
+          <span class="body-2">total</span>
+        </div>
+        <!-- <span class="body-2">------------------------------------------------------------------------------------------------</span> -->
+        <div class="esq__inter-header" *ngFor="let item of venda.produtos">
+          <span>{{ item.id }}</span>
+          <span>{{ item.nome }}</span>
+          <span>{{ item.valorUnidade }}</span>
+          <span>{{ item.qntd }}</span>
+          <span>{{ item.total }}</span>
+        </div>
+        <!-- <span class="body-2">------------------------------------------------------------------------------------------------</span> -->
+        <div class="total__nota">
+          <span class="headline-4">TOTAL : </span>
+          <span class="headline-4">{{ venda.totalGeral | currency: 'BRL':'symbol'}}</span>
+        </div>
+        <p>total: {{ venda.totalGeral | currency: 'BRL':'symbol'}}</p>
       </mat-expansion-panel>
-    </ng-container>
+    </div>
   </mat-accordion>
 
 </div>
+<!-- <ng-container *ngIf="!botoes">
+      <mat-spinner></mat-spinner>
+    </ng-container> -->
 
 <div *ngIf="!botoes">
   <div class="header">
     <span class="headline-4">Caixa - ABERTO</span>
   </div>
   <div class="main__principal">
-    <!-- <ng-container *ngIf="!botoes">
-      <mat-spinner></mat-spinner>
-    </ng-container> -->
     <div class="todo">
       <div class="esq" *ngIf="clickedRows.length">
         <div class="header__sub">
@@ -66,20 +86,20 @@
             <span class="body-2">unidade</span>
             <span class="body-2">qtd</span>
             <span class="body-2">total</span>
-        </div>
-        <span class="body-2">------------------------------------------------------------------------------------------------</span>
-        <div class="esq__inter-header" *ngFor="let item of clickedRows">
-          <span>{{item.idProduto}}</span>
-          <span>{{item.nomeproduto}}</span>
-          <span>{{item.valorunidade}}</span>
-          <span>{{item.quantidade}}</span>
-          <span>{{item.total}}</span>
-        </div>
-        <span class="body-2">------------------------------------------------------------------------------------------------</span>
-        <div class="total__nota">
-          <span class="headline-4">TOTAL : </span>
-          <span class="headline-4">{{ total | currency: 'BRL':'symbol' }}</span>
-        </div>
+          </div>
+          <span class="body-2">------------------------------------------------------------------------------------------------</span>
+          <div class="esq__inter-header" *ngFor="let item of clickedRows">
+            <span>{{item.idProduto}}</span>
+            <span>{{item.nomeproduto}}</span>
+            <span>{{item.valorunidade}}</span>
+            <span>{{item.quantidade}}</span>
+            <span>{{item.total}}</span>
+          </div>
+          <span class="body-2">------------------------------------------------------------------------------------------------</span>
+          <div class="total__nota">
+            <span class="headline-4">TOTAL : </span>
+            <span class="headline-4">{{ total | currency: 'BRL':'symbol' }}</span>
+          </div>
       </div>
       <div>
         <button mat-stroked-button (click)="proximo()" color="primary" *ngIf="finalizar">Próximo</button>
@@ -88,7 +108,6 @@
           <button mat-stroked-button (click)="fecharVenda()" color="primary">Finalizar venda</button>
         </ng-container>
       </div>
-
     </div>
     <div class="meio" *ngIf="finalizar">
       <div class="header__sub">
@@ -162,7 +181,7 @@
               </mat-form-field>
               <mat-label>QUANTIDADE</mat-label>
               <mat-form-field appearance="outline">
-                <input matInput #qtd type="number" name="quantidade" formControlName="quantidade" required />
+                <input matInput #qtd type="number" name="quantidade" maxlength="{{produto.qntdEstoque}}" formControlName="quantidade" required />
               </mat-form-field>
               <mat-label>PREÇO UNITÁRIO</mat-label>
               <mat-form-field appearance="outline">
@@ -227,6 +246,9 @@
       </div>
     </div>
     </div>
-
   </div>
+  <button mat-raised-button (click)="cancelarVenda()" color="warn">
+    <mat-icon>close</mat-icon>
+    CANCELAR VENDA
+  </button>
 </div>

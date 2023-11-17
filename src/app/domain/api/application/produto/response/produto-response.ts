@@ -5,3 +5,11 @@ export interface ProdutoResponse {
 	qntdEstoque: number
 	valor: number
 }
+
+export interface ProdutoVendido {
+  id: number
+  nome: string
+	qntd: number
+	valorUnidade: number
+  total: number
+}

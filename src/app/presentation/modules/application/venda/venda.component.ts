@@ -1,4 +1,4 @@
-import { VendaResponse } from 'src/app/domain/api/application/venda/response/venda-response';
+import { VendaFiltradas, VendaResponse } from 'src/app/domain/api/application/venda/response/venda-response';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,6 +11,7 @@ import { CreateVendaRequest } from 'src/app/domain/api/application/venda/request
 import { DialogReturn } from 'src/app/shared/models/dialog-return';
 import { AumentarQuantidadeComponent } from './dialogs/aumentar-quantidade/aumentar-quantidade.component';
 import { VendaService } from 'src/app/domain/api/application/venda/service/venda.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-venda',
@@ -39,10 +40,12 @@ export class VendaComponent implements OnInit {
   total!: number;
   panelOpenState = false;
   vendas: VendaResponse[] = []
+  vendasFiltradas: VendaFiltradas[] = []
 
   // dataHora: moment()
 
   constructor(private produtoService: ProdutoService,
+              private notification: MatSnackBar,
               private vendaService: VendaService,
               public dialog: MatDialog, private fb: FormBuilder) {
                 this.formPesquisa = this.fb.group({
@@ -107,6 +110,7 @@ export class VendaComponent implements OnInit {
             // console.log(v);
           })
     })
+    this.notification.open('Venda realizada com sucesso!', 'Sucesso', { duration: 3000 });
   }
 
   buscarVendas() {
@@ -114,8 +118,42 @@ export class VendaComponent implements OnInit {
         .pipe(take(1))
         .subscribe((v) => {
           this.vendas = v;
-          // console.log(v);
+          this.filtrarVendasPeloNumeroNota(this.vendas);
+          console.log(v);
         })
+  }
+
+  filtrarVendasPeloNumeroNota(vendas: VendaResponse[]) {
+    this.vendasFiltradas = [];
+    vendas.forEach(venda => {
+      const vendaFiltradaExistente = this.vendasFiltradas.find(vf => vf.numeronota === venda.numeronota);
+      if (!vendaFiltradaExistente) {
+        const novaVendaFiltrada: VendaFiltradas = {
+          id: venda.id,
+          numeronota: venda.numeronota,
+          produtos: [{
+            id: venda.idProduto,
+            nome: venda.nomeproduto,
+            qntd: venda.quantidade,
+            valorUnidade: venda.valorunidade,
+            total: venda.total
+          }],
+          totalGeral: venda.total
+        };
+        this.vendasFiltradas.push(novaVendaFiltrada);
+      } else {
+        vendaFiltradaExistente.produtos.push({
+          id: venda.idProduto,
+          nome: venda.nomeproduto,
+          qntd: venda.quantidade,
+          valorUnidade: venda.valorunidade,
+          total: venda.total
+        });
+        vendaFiltradaExistente.totalGeral += venda.total;
+      }
+    });
+    console.log(this.vendasFiltradas);
+    return this.vendasFiltradas;
   }
 
   somarTotais(lista: CreateVendaRequest[]): number {
@@ -133,6 +171,8 @@ export class VendaComponent implements OnInit {
 
   criarVenda() {
     this.botoes = !this.botoes;
+    this.buscarProdutos();
+    this.buscarVendas();
   }
 
   addProdutoNaNota(prod: ProdutoResponse) {
@@ -152,10 +192,16 @@ export class VendaComponent implements OnInit {
         }
       });
     }
+    if(this.vendas.length > 0) {
+      const ultimaVenda = this.vendas[this.vendas.length -1];
+      const numNota = ultimaVenda.numeronota + 1;
+      this.form.controls['numeronota'].setValue(numNota);
+    } else {
+      this.form.controls['numeronota'].setValue(1);
+    }
 
     const desc = this.produto.nome +', '+ this.produto.marca;
     this.form.controls['id'].setValue(this.produto.id);
-    this.form.controls['numeronota'].setValue(1111);
     this.form.controls['descricao'].setValue(desc);
     this.form.controls['quantidade'].setValue(1);
     this.form.controls['preco'].setValue(this.produto.valor);
@@ -186,15 +232,25 @@ export class VendaComponent implements OnInit {
   fecharVenda() {
     // this.botoes = !this.botoes;
     this.salvarVenda();
+    this.cancelarVenda();
+    this.buscarVendas();
+    // console.log(this.clickedRows);
+  }
+
+  cancelarVenda() {
     this.form.reset();
     this.formTotais.reset();
     this.formPesquisa.reset();
     this.clickedRows = [];
     this.produtos = [];
-    this.buscarProdutos();
+    this.vendas = [];
+    this.dataSource.data = [];
+    this.vendasFiltradas = [];
     this.finalizar = !this.finalizar;
-    this.botoes = !this.botoes;
-    // console.log(this.clickedRows);
+    this.botoes = true;
+    this.buscarVendas();
+    // this.zerarProduto();//CONTINUAR AQUI RESOLVENDO CANCELAR VENDA PARA RETORNAR TODOS INPUTS PARA INICIAR NOVA VENDA
+    this.buscarProdutos();
   }
 
   zerarProduto() {

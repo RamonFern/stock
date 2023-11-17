@@ -1,3 +1,5 @@
+import { ProdutoVendido } from "../../produto/response/produto-response"
+
 export interface VendaResponse {
   id: number
   numeronota: number
@@ -10,4 +12,11 @@ export interface VendaResponse {
 	status: string
   formaPag: string
 	dataVenda: string
+}
+
+export interface VendaFiltradas {
+  id: number
+  numeronota: number
+  produtos: ProdutoVendido[]
+  totalGeral: number
 }
