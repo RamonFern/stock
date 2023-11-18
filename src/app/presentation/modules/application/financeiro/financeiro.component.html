@@ -1,0 +1,57 @@
+<div class="buttons">
+  <div class="tabs__nav-bar" #navbar >
+    <a  class="tab-label mat-elevation-z8">
+      <mat-icon class="nav__icon">
+        <span class="material-symbols-outlined">
+          currency_exchange
+        </span>
+      </mat-icon>
+      <span class="headline-4 tab-label__title">Fechar Caixa</span>
+    </a>
+  </div>
+  <div class="tabs__nav-bar" #navbar>
+    <a  class="tab-label mat-elevation-z8">
+      <mat-icon class="nav__icon">
+        <span class="material-symbols-outlined">
+          sell
+        </span>
+      </mat-icon>
+      <span class="headline-4 tab-label__title">Visualizar</span>
+    </a>
+  </div>
+</div>
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+    <mat-card-title>Vendas do dia {{ vendas[0].dataVenda  | date:'dd/MM/yyyy' }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="header">
+      <span>numero nota</span>
+      <span>nome</span>
+      <span>unidade</span>
+      <span>qtd</span>
+      <span>total</span>
+    </div>
+    <ng-container *ngFor="let venda of vendas">
+      <div class="header">
+        <span class="body-2">{{ venda.numeronota }}</span>
+        <span class="body-2">{{ venda.nomeproduto }}</span>
+        <span class="body-2">{{ venda.valorunidade | currency: 'BRL':'symbol' }}</span>
+        <span class="body-2">{{ venda.quantidade }}</span>
+        <span class="body-2">{{ venda.total | currency: 'BRL':'symbol' }}</span>
+      </div>
+    </ng-container>
+    <h2>Total: {{ calcularSomaTotal() | currency: 'BRL':'symbol' }}</h2>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button>FECHAR</button>
+    <button mat-button>CANCELAR</button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+  </mat-card-footer>
+</mat-card>
+

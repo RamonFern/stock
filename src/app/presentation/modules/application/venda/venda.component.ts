@@ -53,11 +53,11 @@ export class VendaComponent implements OnInit {
                 })
 
                 this.formTotais = this.fb.group({
-                  totalGeral: new FormControl(0),
+                  totalGeral: new FormControl(null),
                   desconto: new FormControl(0),
                   subtotal: new FormControl(0),
-                  valorRecebido: new FormControl(0),
-                  troco: new FormControl(0)
+                  valorRecebido: new FormControl(null),
+                  troco: new FormControl(null)
                 })
 
                 this.formTotais.get('desconto')?.disable();
@@ -76,12 +76,12 @@ export class VendaComponent implements OnInit {
                   })
 
                 this.form = this.fb.group({
-                  id: new FormControl(0, Validators.required),
-                  numeronota: new FormControl(0, Validators.required),
-                  descricao: new FormControl('', Validators.required),
-                  quantidade : new FormControl(0, Validators.required),
-                  preco: new FormControl(0, Validators.required),
-                  total: new FormControl(0, Validators.required),
+                  id: new FormControl(null, Validators.required),
+                  numeronota: new FormControl(null, Validators.required),
+                  descricao: new FormControl(null, Validators.required),
+                  quantidade : new FormControl(null, Validators.required),
+                  preco: new FormControl(null, Validators.required),
+                  total: new FormControl(null, Validators.required),
                 })
 
                 this.form.valueChanges
@@ -91,8 +91,10 @@ export class VendaComponent implements OnInit {
                   const quantidade = values.quantidade;
                   const preco = values.preco;
                   const total = quantidade * preco
-                  this.form.get('total')?.setValue(total.toFixed(2));
+                  // this.form.get('preco')?.setValue(preco.toFixed(2));
+                  this.form.get('total')?.setValue(total);
                   this.total = this.somarTotais(this.clickedRows);
+                  // const totalGeral = this.total
                   this.formTotais.get('totalGeral')?.setValue(this.total);
                   this.form.get('id')?.disable();
                   this.form.get('descricao')?.disable();

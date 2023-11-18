@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-layout',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  // agora: Date;
+  // private datePipe: DatePipe
+  constructor() {
+    // this.agora = new Date();
+  }
 
   ngOnInit() {
   }
+
+  // formatarDataHora(data: Date){
+  //   this.datePipe.transform(data, 'dd/MM/yyyy HH:mm:ss');
+  // }
 
 }

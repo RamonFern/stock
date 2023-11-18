@@ -12,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
@@ -21,6 +23,7 @@ import { CadastroProdutosComponent } from './gerenciar/dialogs/cadastro-produtos
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VendaComponent } from './venda/venda.component';
 import { AumentarQuantidadeComponent } from './venda/dialogs/aumentar-quantidade/aumentar-quantidade.component';
+import { FinanceiroComponent } from './financeiro/financeiro.component';
 
 
 @NgModule({
@@ -31,12 +34,15 @@ import { AumentarQuantidadeComponent } from './venda/dialogs/aumentar-quantidade
       GerenciarComponent,
       CadastroProdutosComponent,
       VendaComponent,
-      AumentarQuantidadeComponent
+      AumentarQuantidadeComponent,
+      FinanceiroComponent
     ],
     imports: [
       CommonModule,
       ApplicationRoutingModule,
+      MatCardModule,
       MatOptionModule,
+      MatDividerModule,
       FormsModule,
       ReactiveFormsModule,
       MatProgressSpinnerModule,
