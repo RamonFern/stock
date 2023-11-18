@@ -48,6 +48,11 @@
       <td mat-cell *matCellDef="let element"> {{element.qntdEstoque}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="valorEntrada">
+      <th mat-header-cell *matHeaderCellDef> Valor da entrada </th>
+      <td mat-cell *matCellDef="let element"> {{element.valorEntrada | currency: 'BRL':'symbol'}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="valor">
       <th mat-header-cell *matHeaderCellDef> Valor </th>
       <td mat-cell *matCellDef="let element"> {{element.valor | currency: 'BRL':'symbol'}} </td>
@@ -57,7 +62,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="5">No data matching the filter "{{input.value}}"</td>
+      <td class="mat-cell" colspan="6">No data matching the filter "{{input.value}}"</td>
     </tr>
   </table>
 </ng-container>

@@ -70,7 +70,8 @@ export class VendaComponent implements OnInit {
                   .subscribe((values) => {
                     const valorRecebido = values.valorRecebido;
                     const total = values.totalGeral;
-                    this.formTotais.get('troco')?.setValue(valorRecebido - total);
+                    const troco = valorRecebido - total;
+                    this.formTotais.get('troco')?.setValue(troco.toFixed(2));
                     //this.form.get('total')?.setValue(quantidade * preco);
                   })
 
@@ -89,7 +90,8 @@ export class VendaComponent implements OnInit {
                   .subscribe((values) => {
                   const quantidade = values.quantidade;
                   const preco = values.preco;
-                  this.form.get('total')?.setValue(quantidade * preco);
+                  const total = quantidade * preco
+                  this.form.get('total')?.setValue(total.toFixed(2));
                   this.total = this.somarTotais(this.clickedRows);
                   this.formTotais.get('totalGeral')?.setValue(this.total);
                   this.form.get('id')?.disable();
@@ -136,7 +138,7 @@ export class VendaComponent implements OnInit {
         .subscribe((v) => {
           this.vendas = v;
           this.filtrarVendasPeloNumeroNota(this.vendas);
-          console.log(v);
+          // console.log(v);
         })
   }
 
@@ -169,7 +171,7 @@ export class VendaComponent implements OnInit {
         vendaFiltradaExistente.totalGeral += venda.total;
       }
     });
-    console.log(this.vendasFiltradas);
+    // console.log(this.vendasFiltradas);
     return this.vendasFiltradas;
   }
 
@@ -189,7 +191,7 @@ export class VendaComponent implements OnInit {
   criarVenda() {
     this.botoes = !this.botoes;
     this.buscarProdutos();
-    this.buscarVendas();
+    //this.buscarVendas();
   }
 
   addProdutoNaNota(prod: ProdutoResponse) {
@@ -221,28 +223,34 @@ export class VendaComponent implements OnInit {
     this.form.controls['id'].setValue(this.produto.id);
     this.form.controls['descricao'].setValue(desc);
     this.form.controls['quantidade'].setValue(1);
+    // this.qtd.nativeElement.focus();
     this.form.controls['preco'].setValue(this.produto.valor);
     this.form.controls['total'].setValue(this.produto.valor);
     this.removerObjeto(prod, this.produtos);
     this.dataSource.data = this.produtos;
+    // this.form.get('quantidade')?.markAsTouched(); //.markAsTouched();
   }
 
   enviarParaNota() {
-    const vendaRequest: CreateVendaRequest = {
-      numeronota: this.form.controls['numeronota'].value,
-      idProduto: this.form.controls['id'].value,
-      nomeproduto: this.form.controls['descricao'].value,
-      valorunidade: this.form.controls['preco'].value,
-      quantidade: this.form.controls['quantidade'].value,
-      desconto: 0,
-      total: this.form.controls['total'].value,
-      status: 'PENDENTE',
-      formaPag: 'DINHEIRO',
-      // dataVenda: '2023-10-27T10:15:30+01:00',
-      // dataVenda: moment().locale('pt').toLocaleString(),
+    if(this.form.valid) {
+      const vendaRequest: CreateVendaRequest = {
+        numeronota: this.form.controls['numeronota'].value,
+        idProduto: this.form.controls['id'].value,
+        nomeproduto: this.form.controls['descricao'].value,
+        valorunidade: this.form.controls['preco'].value,
+        quantidade: this.form.controls['quantidade'].value,
+        desconto: 0,
+        total: this.form.controls['total'].value,
+        status: 'PENDENTE',
+        formaPag: 'DINHEIRO',
+        // dataVenda: '2023-10-27T10:15:30+01:00',
+        // dataVenda: moment().locale('pt').toLocaleString(),
+      }
+      this.clickedRows.push(vendaRequest);
+      this.zerarProduto();
+    } else {
+      this.notification.open('Existe(m) campo(s) inválido(s)!', 'Erro', { duration: 3000 });
     }
-    this.clickedRows.push(vendaRequest);
-    this.zerarProduto();
     // PENSAR EM LÓGICA PARA DIMINUIR QUANT DE PRODUTOS COMFORME VENDA MANUTENÇÃO NO ESTOQUE
   }
 
@@ -276,7 +284,8 @@ export class VendaComponent implements OnInit {
       nome: '',
       marca: '',
       qntdEstoque: 0,
-      valor: 0
+      valor: 0,
+      valorEntrada: 0
     }
     this.produto = valorPadraoProduto;
     this.form.reset();

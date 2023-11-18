@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs';
@@ -15,18 +15,35 @@ import { DialogReturn } from 'src/app/shared/models/dialog-return';
 })
 export class CadastroProdutosComponent implements OnInit {
 
-  form = new FormGroup({
-    nome: new FormControl('', Validators.required),
-    marca: new FormControl('', Validators.required),
-    qntdEstoque : new FormControl(0, Validators.required),
-    valorUnidade: new FormControl(0, Validators.required),
-  })
+  form: FormGroup;
 
   constructor(private produtoService: ProdutoService,
               private notification: MatSnackBar,
-              public dialogRef: MatDialogRef<CadastroProdutosComponent>,) { }
+              private fb: FormBuilder,
+              public dialogRef: MatDialogRef<CadastroProdutosComponent>,) {
+                this.form = this.fb.group({
+                  nome: new FormControl(null, Validators.required),
+                  marca: new FormControl(null, Validators.required),
+                  qntdEstoque : new FormControl(null, Validators.required),
+                  valorEntrada: new FormControl(null, Validators.required),
+                  valorUnidade: new FormControl(null, Validators.required),
+                });
+
+                this.form.get('valorEntrada')?.valueChanges.subscribe(() => {
+                  this.atualizarValorUnidade();
+                })
+              }
 
   ngOnInit() {
+  }
+
+  atualizarValorUnidade() {
+    const valorEntrada = this.form.get('valorEntrada')?.value;
+    const porcentagem = 0.25; // 25%, ajuste conforme necessário
+    const novoValorUnidade = valorEntrada * (1 + porcentagem);
+
+    // Atualize o valor do campo "valorUnidade"
+    this.form.get('valorUnidade')?.patchValue(novoValorUnidade.toFixed(2), { emitEvent: false });
   }
 
   create() {
@@ -35,7 +52,8 @@ export class CadastroProdutosComponent implements OnInit {
         nome: this.form.controls['nome'].value,
         marca: this.form.controls['marca'].value,
         qntdEstoque: this.form.controls['qntdEstoque'].value,
-        valor: this.form.controls['valorUnidade'].value
+        valorEntrada: this.form.controls['valorEntrada'].value,
+        valor: this.form.controls['valorUnidade'].value,
       };
       this.produtoService
           .salvarProduto(request)

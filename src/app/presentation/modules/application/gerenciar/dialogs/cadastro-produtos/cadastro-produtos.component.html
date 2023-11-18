@@ -1,34 +1,54 @@
 <div class="second-form-wrapper" >
   <mat-dialog-content>
     <form [formGroup]="form">
-        <span class="subtitle-2">Cadastro de Produtos</span>
-        <div class="list_input-column">
-            <mat-form-field appearance="outline">
-                <mat-label>Nome do produto</mat-label>
-                <input matInput type="text" name="nome" formControlName="nome" required />
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Marca</mat-label>
-                <input matInput type="text" name="marca" formControlName="marca" required />
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Quantidade</mat-label>
-                <input matInput type="number" name="qntdEstoque" formControlName="qntdEstoque" required />
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
+      <header class="header">
+        <span class="headline-4">Cadastro de Produtos</span>
+      </header>
+      <div class="list_input-column">
+          <mat-label>Nome do produto</mat-label>
+          <mat-form-field appearance="outline">
+              <mat-label>Produto</mat-label>
+              <input matInput type="text" name="nome" formControlName="nome" required />
+          </mat-form-field>
+          <mat-label>Marca</mat-label>
+          <mat-form-field appearance="outline">
+              <mat-label>Marca</mat-label>
+              <input matInput type="text" name="marca" formControlName="marca" required />
+          </mat-form-field>
+          <mat-label>Qntd</mat-label>
+          <mat-form-field appearance="outline">
+              <mat-label>Quantidade</mat-label>
+              <input matInput type="number" name="qntdEstoque" formControlName="qntdEstoque" required />
+          </mat-form-field>
+          <div class="valores">
+            <div class="valores__int">
+              <mat-label>Valor de entrada</mat-label>
+              <mat-form-field appearance="outline">
+                <mat-label>Valor</mat-label>
+                <input matInput type="number" name="valorEntrada" formControlName="valorEntrada" required />
+              </mat-form-field>
+            </div>
+            <div class="porcentagem">
+              <span class="body-2">25%</span>
+            </div>
+            <div class="valores__int">
               <mat-label>Valor da unidade</mat-label>
-              <input matInput type="number" name="valorUnidade" formControlName="valorUnidade" required />
-            </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Valor da unidade</mat-label>
+                <input matInput type="number" name="valorUnidade" formControlName="valorUnidade" required />
+              </mat-form-field>
+            </div>
+          </div>
 
-        </div>
+      </div>
     </form>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-raised-button color="primary" (click)="create()">
-      <div>SALVAR</div>
-      <!-- <div *ngIf="loadRequisicao"><mat-spinner diameter="40"></mat-spinner></div> -->
-    </button>
+    <div class="button">
+      <button mat-raised-button color="primary" (click)="create()">
+        SALVAR <!-- <div *ngIf="loadRequisicao"><mat-spinner diameter="40"></mat-spinner></div> -->
+      </button>
+      <button mat-button mat-dialog-close color="warn">CANCELAR</button>
+    </div>
   </mat-dialog-actions>
 </div>

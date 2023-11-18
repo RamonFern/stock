@@ -12,7 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./gerenciar.component.css']
 })
 export class GerenciarComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nome', 'marca', 'qntdEstoque', 'valor'];
+  displayedColumns: string[] = ['id', 'nome', 'marca', 'qntdEstoque', 'valorEntrada' , 'valor'];
   dataSource = new MatTableDataSource();
 
   constructor(public dialog: MatDialog, private produtoService: ProdutoService) {
@@ -37,8 +37,7 @@ export class GerenciarComponent implements OnInit {
 
   cadastroProduto(): void {
     const dialogRef = this.dialog.open(CadastroProdutosComponent, {
-        width: '950px',
-
+        width: '1250px',
     });
 
     dialogRef.afterClosed().subscribe((dialogReturn: DialogReturn) => {

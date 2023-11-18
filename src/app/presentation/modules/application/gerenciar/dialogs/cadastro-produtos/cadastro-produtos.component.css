@@ -3,5 +3,35 @@
   flex-direction: column;
 }
 
+.header {
+  display: flex;
+  margin-bottom: 24px;
+  justify-content: center;
+}
+
+.button {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.valores {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr;
+  gap: 1rem;
+}
+
+.valores__int {
+  display: flex;
+  flex-direction: column;
+}
+
+.porcentagem {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 
 

@@ -3,6 +3,7 @@ export interface ProdutoResponse {
   nome: string
 	marca: string
 	qntdEstoque: number
+  valorEntrada: number
 	valor: number
 }
 
