@@ -9,14 +9,11 @@ import { VendaService } from 'src/app/domain/api/application/venda/service/venda
   styleUrls: ['./financeiro.component.css']
 })
 export class FinanceiroComponent implements OnInit {
-  longText = `The Shiba Inu is the smallest of the six`;
   vendas: VendaResponse[] = [];
-  total!: number;
   constructor(private vendasService: VendaService) { }
 
   ngOnInit() {
     this.buscarVendas();
-    // this.total = this.calcularSomaTotal();
   }
 
   buscarVendas() {

@@ -39,8 +39,8 @@ export class CadastroProdutosComponent implements OnInit {
 
   atualizarValorUnidade() {
     const valorEntrada = this.form.get('valorEntrada')?.value;
-    const porcentagem = 0.25; // 25%, ajuste conforme necessário
-    const novoValorUnidade = valorEntrada * (1 + porcentagem);
+    const porcento = 0.25; // 25%, ajuste conforme necessário
+    const novoValorUnidade = valorEntrada * (1 + porcento);
 
     // Atualize o valor do campo "valorUnidade"
     this.form.get('valorUnidade')?.patchValue(novoValorUnidade.toFixed(2), { emitEvent: false });
@@ -67,5 +67,6 @@ export class CadastroProdutosComponent implements OnInit {
       this.notification.open('Informe todos os campos!', 'Erro', { duration: 3000 });
     }
   }
+
 
 }

@@ -49,3 +49,9 @@
   grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
   justify-items: center;
 }
+
+.total {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}

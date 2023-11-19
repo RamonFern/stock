@@ -21,7 +21,7 @@
   </div>
 </div>
 
-<mat-card class="example-card">
+<mat-card class="example-card" *ngIf="vendas.length">
   <mat-card-header>
     <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
     <mat-card-title>Vendas do dia {{ vendas[0].dataVenda  | date:'dd/MM/yyyy' }}</mat-card-title>
@@ -43,7 +43,9 @@
         <span class="body-2">{{ venda.total | currency: 'BRL':'symbol' }}</span>
       </div>
     </ng-container>
-    <h2>Total: {{ calcularSomaTotal() | currency: 'BRL':'symbol' }}</h2>
+    <div class="total">
+      <h2>Total: {{ calcularSomaTotal() | currency: 'BRL':'symbol' }}</h2>
+    </div>
     <mat-divider></mat-divider>
   </mat-card-content>
   <mat-card-actions align="end">
