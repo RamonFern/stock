@@ -1,0 +1,50 @@
+<div class="container" >
+    <div class="side-left">
+        <div class="logo">
+            <img src="/assets/images/logo 1.png" width="123" alt="" />
+        </div>
+        <div class="slogan">
+            <h2>Soluções para sua clínica</h2>
+            <span class="slogan__text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elit dui, interdum rhoncus feugiat quis, hendrerit varius mauris. Quisque non
+                dapibus felis.
+            </span>
+            <button color="primary" mat-raised-button>Saiba mais</button>
+        </div>
+    </div>
+
+    <div class="side-right">
+        <form [formGroup]="formLogin" (ngSubmit)="login()">
+            <div class="login-form">
+                <h3>Entrar</h3>
+                <span class="login-form__info"
+                    >Insira seu usuário e senha caso seja um usuário cadastrado, ou <strong>solicite permissão</strong> a um administrador.</span
+                >
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Usuário</mat-label>
+                    <input matInput formControlName="login" />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Senha</mat-label>
+                    <input matInput formControlName="password" type="password" />
+                </mat-form-field>
+
+                <div class="login-form__pass">
+                    <!-- <mat-checkbox>Lembrar-me!</mat-checkbox> -->
+                    <div class="login-form__pass-options">
+                        <a routerLink="/login/esqueci-minha-senha" class="login-form__link">Esqueci minha senha</a>
+                        <a routerLink="/login/esqueci-meu-email" class="login-form__link">Esqueci meu usuário</a>
+                    </div>
+                </div>
+
+                <button color="primary" mat-raised-button>Entrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- <div class="load" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+</div> -->
