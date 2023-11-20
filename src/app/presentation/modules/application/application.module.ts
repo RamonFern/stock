@@ -24,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VendaComponent } from './venda/venda.component';
 import { AumentarQuantidadeComponent } from './venda/dialogs/aumentar-quantidade/aumentar-quantidade.component';
 import { FinanceiroComponent } from './financeiro/financeiro.component';
+import { EditarProdutoComponent } from './gerenciar/dialogs/editar-produto/editar-produto.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { FinanceiroComponent } from './financeiro/financeiro.component';
       CadastroProdutosComponent,
       VendaComponent,
       AumentarQuantidadeComponent,
-      FinanceiroComponent
+      FinanceiroComponent,
+      EditarProdutoComponent
     ],
     imports: [
       CommonModule,

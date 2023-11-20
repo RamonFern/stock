@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProdutoService } from 'src/app/domain/api/application/produto/service/produto.service';
 import { take } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
+import { ProdutoResponse } from 'src/app/domain/api/application/produto/response/produto-response';
+import { EditarProdutoComponent } from './dialogs/editar-produto/editar-produto.component';
 
 @Component({
   selector: 'app-gerenciar',
@@ -14,12 +16,28 @@ import { MatTableDataSource } from '@angular/material/table';
 export class GerenciarComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nome', 'marca', 'qntdEstoque', 'valorEntrada' , 'valor'];
   dataSource = new MatTableDataSource();
+  produtoSelecionado!: ProdutoResponse;
 
   constructor(public dialog: MatDialog, private produtoService: ProdutoService) {
   }
 
   ngOnInit() {
     this.listarProdutos();
+  }
+
+  editarProduto(prod: ProdutoResponse) {
+    this.produtoSelecionado = prod;
+    const dialogRef = this.dialog.open(EditarProdutoComponent, {
+      width: '1250px',
+      data: this.produtoSelecionado,
+  });
+
+  dialogRef.afterClosed().subscribe((dialogReturn: DialogReturn) => {
+      if (dialogReturn?.hasDataChanged) {
+        this.listarProdutos();
+      }
+  });
+    // console.log(prod);
   }
 
   applyFilter(event: Event) {
