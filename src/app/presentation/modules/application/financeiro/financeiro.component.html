@@ -21,22 +21,22 @@
   </div>
 </div>
 
-<mat-card class="example-card" *ngIf="vendas.length">
+<mat-card class="example-card" *ngIf="vendasUnificadas.length">
   <mat-card-header>
     <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
     <mat-card-title>Vendas do dia {{ vendas[0].datavenda  | date:'dd/MM/yyyy' }}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <div class="header">
-      <span>numero nota</span>
+      <span>cod</span>
       <span>nome</span>
       <span>unidade</span>
       <span>qtd</span>
       <span>total</span>
     </div>
-    <ng-container *ngFor="let venda of vendas">
+    <ng-container *ngFor="let venda of vendasUnificadas">
       <div class="header">
-        <span class="body-2">{{ venda.numeronota }}</span>
+        <span class="body-2">{{ venda.idproduto }}</span>
         <span class="body-2">{{ venda.nomeproduto }}</span>
         <span class="body-2">{{ venda.valorunidade | currency: 'BRL':'symbol' }}</span>
         <span class="body-2">{{ venda.quantidade }}</span>
