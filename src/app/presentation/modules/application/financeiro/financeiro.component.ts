@@ -18,7 +18,7 @@ export class FinanceiroComponent implements OnInit {
   }
 
   buscarVendas() {
-    this.vendasService.listAll()
+    this.vendasService.listAllToDay()
         .pipe(take(1))
         .subscribe((vendas) => {
           this.vendas = vendas;
@@ -40,7 +40,6 @@ export class FinanceiroComponent implements OnInit {
       }
     });
   }
-
 
   calcularSomaTotal(): number {
     return this.vendas.reduce((total, venda) => total + venda.total, 0);

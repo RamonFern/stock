@@ -26,7 +26,10 @@
             nº nota: {{venda.numeronota}}
           </mat-panel-title>
           <mat-panel-description>
-            valor da nota: {{ venda.totalGeral | currency: 'BRL':'symbol' }}
+            <div class="panel">
+              <span class="body-2">valor da nota: {{ venda.totalGeral | currency: 'BRL':'symbol' }}</span>
+              <span class="body-2">data: {{ venda.datavenda | date:'dd/MM/yyyy HH:mm' }}</span>
+            </div>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div class="esq__inter-header">

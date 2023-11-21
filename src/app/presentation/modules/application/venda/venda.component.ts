@@ -135,7 +135,7 @@ export class VendaComponent implements OnInit {
   }
 
   buscarVendas() {
-    this.vendaService.listAll()
+    this.vendaService.listAllToDay()
         .pipe(take(1))
         .subscribe((v) => {
           this.vendas = v;
@@ -152,6 +152,7 @@ export class VendaComponent implements OnInit {
         const novaVendaFiltrada: VendaFiltradas = {
           id: venda.id,
           numeronota: venda.numeronota,
+          datavenda: venda.datavenda,
           produtos: [{
             id: venda.idproduto,
             nome: venda.nomeproduto,
@@ -257,10 +258,15 @@ export class VendaComponent implements OnInit {
   }
 
   fecharVenda() {
-    // this.botoes = !this.botoes;
-    this.salvarVenda();
-    this.cancelarVenda();
-    this.buscarVendas();
+    const valorRecebido = this.formTotais.controls['valorRecebido'].value;
+    const total = this.formTotais.controls['totalGeral'].value;
+    if(valorRecebido < total) {
+      this.notification.open('O valor recebido não pode ser menor do que o valor total', 'Erro', { duration: 3000 });
+    } else {
+      this.salvarVenda();
+      this.cancelarVenda();
+      this.buscarVendas();
+    }
     // console.log(this.clickedRows);
   }
 

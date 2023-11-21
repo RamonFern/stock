@@ -20,4 +20,8 @@ export class VendaService {
     return this.httpClient.post<VendaResponse>(`${this.baseUrl}api/venda`, venda);
   }
 
+  listAllToDay() {
+    return this.httpClient.get<VendaResponse[]>(`${this.baseUrl}api/venda/hoje`);
+  }
+
 }

@@ -17,6 +17,7 @@ export interface VendaResponse {
 export interface VendaFiltradas {
   id: number
   numeronota: number
+  datavenda: string
   produtos: ProdutoVendido[]
   totalGeral: number
 }
