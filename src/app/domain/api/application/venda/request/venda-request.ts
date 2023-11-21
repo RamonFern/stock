@@ -1,12 +1,12 @@
 export interface CreateVendaRequest {
   numeronota: number
-	idProduto: number
+	idproduto: number
 	nomeproduto: string
 	valorunidade: string
 	quantidade: number
 	desconto: number
 	total: number
 	status: string
-  formaPag: string
+  formapag: string
 	// dataVenda: string
 }

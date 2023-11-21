@@ -45,12 +45,12 @@
 
     <ng-container matColumnDef="qntdEstoque">
       <th mat-header-cell *matHeaderCellDef> Quantidade </th>
-      <td mat-cell *matCellDef="let element"> {{element.qntdEstoque}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.qntdestoque}} </td>
     </ng-container>
 
     <ng-container matColumnDef="valorEntrada">
       <th mat-header-cell *matHeaderCellDef> Valor da entrada </th>
-      <td mat-cell *matCellDef="let element"> {{element.valorEntrada | currency: 'BRL':'symbol'}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.valorentrada | currency: 'BRL':'symbol'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="valor">

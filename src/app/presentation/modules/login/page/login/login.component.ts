@@ -43,6 +43,11 @@ export class LoginComponent implements OnInit {
             login: this.formLogin.controls['login'].value,
             password: this.formLogin.controls['password'].value,
         };
+        if (!this.formLogin.invalid) {
+          this.router.navigate(['app']);
+        } else {
+          this.snackBar.open('Erro', 'Login e/ou senha incorretos', { duration: 5000 });
+        }
         // if (!this.formLogin.invalid) {
         //     this.loginService.realizarLogin(loginResquest).subscribe(
         //         (response) => {

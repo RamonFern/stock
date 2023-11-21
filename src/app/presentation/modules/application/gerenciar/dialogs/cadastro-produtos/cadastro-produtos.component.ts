@@ -51,8 +51,8 @@ export class CadastroProdutosComponent implements OnInit {
       const request: CreateProdutoRequest = {
         nome: this.form.controls['nome'].value,
         marca: this.form.controls['marca'].value,
-        qntdEstoque: this.form.controls['qntdEstoque'].value,
-        valorEntrada: this.form.controls['valorEntrada'].value,
+        qntdestoque: this.form.controls['qntdEstoque'].value,
+        valorentrada: this.form.controls['valorEntrada'].value,
         valor: this.form.controls['valorUnidade'].value,
       };
       this.produtoService

@@ -89,7 +89,7 @@
           </div>
           <span class="body-2">------------------------------------------------------------------------------------------------</span>
           <div class="esq__inter-header" *ngFor="let item of clickedRows">
-            <span>{{item.idProduto}}</span>
+            <span>{{item.idproduto}}</span>
             <span>{{item.nomeproduto}}</span>
             <span>{{item.valorunidade | currency: 'BRL':'symbol'}}</span>
             <span>{{item.quantidade}}</span>
@@ -151,7 +151,7 @@
 
             <ng-container matColumnDef="qntdEstoque">
               <th mat-header-cell *matHeaderCellDef> Quantidade </th>
-              <td mat-cell *matCellDef="let element"> {{element.qntdEstoque}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.qntdestoque}} </td>
             </ng-container>
 
             <ng-container matColumnDef="valor">
@@ -182,8 +182,8 @@
               </mat-form-field>
               <mat-label>QUANTIDADE</mat-label>
               <mat-form-field appearance="outline">
-                <input matInput #qtd type="number" name="quantidade" formControlName="quantidade" required max="{{produto.qntdEstoque}}" />
-                <mat-error *ngIf="form.get('quantidade')?.hasError('max')">A quantidade está maior que o estoque.  estoque: {{ produto.qntdEstoque }}.</mat-error>
+                <input matInput #qtd type="number" name="quantidade" formControlName="quantidade" required max="{{produto.qntdestoque}}" />
+                <mat-error *ngIf="form.get('quantidade')?.hasError('max')">A quantidade está maior que o estoque.  estoque: {{ produto.qntdestoque }}.</mat-error>
               </mat-form-field>
               <mat-label>PREÇO UNITÁRIO</mat-label>
               <mat-form-field appearance="outline">

@@ -26,8 +26,8 @@ export class EditarProdutoComponent implements OnInit {
                   id: new FormControl(data.id),
                   nome: new FormControl(data.nome, Validators.required),
                   marca: new FormControl(data.marca, Validators.required),
-                  qntdEstoque : new FormControl(data.qntdEstoque, Validators.required),
-                  valorEntrada: new FormControl(data.valorEntrada, Validators.required),
+                  qntdEstoque : new FormControl(data.qntdestoque, Validators.required),
+                  valorEntrada: new FormControl(data.valorentrada, Validators.required),
                   valorUnidade: new FormControl(data.valor, Validators.required),
                 });
 
@@ -53,8 +53,8 @@ export class EditarProdutoComponent implements OnInit {
         id: this.form.controls['id'].value,
         nome: this.form.controls['nome'].value,
         marca: this.form.controls['marca'].value,
-        qntdEstoque: this.form.controls['qntdEstoque'].value,
-        valorEntrada: this.form.controls['valorEntrada'].value,
+        qntdestoque: this.form.controls['qntdEstoque'].value,
+        valorentrada: this.form.controls['valorEntrada'].value,
         valor: this.form.controls['valorUnidade'].value,
       };
       console.log(request);

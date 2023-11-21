@@ -3,15 +3,15 @@ import { ProdutoVendido } from "../../produto/response/produto-response"
 export interface VendaResponse {
   id: number
   numeronota: number
-	idProduto: number
+	idproduto: number
 	nomeproduto: string
 	valorunidade: number
 	quantidade: number
 	desconto: number
 	total: number
 	status: string
-  formaPag: string
-	dataVenda: string
+  formapag: string
+	datavenda: string
 }
 
 export interface VendaFiltradas {

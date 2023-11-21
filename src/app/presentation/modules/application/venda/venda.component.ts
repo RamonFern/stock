@@ -119,10 +119,10 @@ export class VendaComponent implements OnInit {
   }
 
   buscarProdutoPorId(venda: VendaResponse) {
-    this.produtoService.buscarPorId(venda.idProduto)
+    this.produtoService.buscarPorId(venda.idproduto)
         .pipe(take(1))
         .subscribe((v) => {
-          v.qntdEstoque = v.qntdEstoque - venda.quantidade;
+          v.qntdestoque = v.qntdestoque - venda.quantidade;
           this.atualizarQntdStock(v, v.id);
         })
   }
@@ -153,7 +153,7 @@ export class VendaComponent implements OnInit {
           id: venda.id,
           numeronota: venda.numeronota,
           produtos: [{
-            id: venda.idProduto,
+            id: venda.idproduto,
             nome: venda.nomeproduto,
             qntd: venda.quantidade,
             valorUnidade: venda.valorunidade,
@@ -164,7 +164,7 @@ export class VendaComponent implements OnInit {
         this.vendasFiltradas.push(novaVendaFiltrada);
       } else {
         vendaFiltradaExistente.produtos.push({
-          id: venda.idProduto,
+          id: venda.idproduto,
           nome: venda.nomeproduto,
           qntd: venda.quantidade,
           valorUnidade: venda.valorunidade,
@@ -198,7 +198,7 @@ export class VendaComponent implements OnInit {
 
   addProdutoNaNota(prod: ProdutoResponse) {
     this.produto = prod;
-    var vendas = this.clickedRows.filter((v) => v.idProduto === this.produto.id)
+    var vendas = this.clickedRows.filter((v) => v.idproduto === this.produto.id)
     if(vendas.length) {
       const dialogRef = this.dialog.open(AumentarQuantidadeComponent, {
         width: '450px',
@@ -237,14 +237,14 @@ export class VendaComponent implements OnInit {
     if(this.form.valid) {
       const vendaRequest: CreateVendaRequest = {
         numeronota: this.form.controls['numeronota'].value,
-        idProduto: this.form.controls['id'].value,
+        idproduto: this.form.controls['id'].value,
         nomeproduto: this.form.controls['descricao'].value,
         valorunidade: this.form.controls['preco'].value,
         quantidade: this.form.controls['quantidade'].value,
         desconto: 0,
         total: this.form.controls['total'].value,
         status: 'PENDENTE',
-        formaPag: 'DINHEIRO',
+        formapag: 'DINHEIRO',
         // dataVenda: '2023-10-27T10:15:30+01:00',
         // dataVenda: moment().locale('pt').toLocaleString(),
       }
@@ -285,9 +285,9 @@ export class VendaComponent implements OnInit {
       id: 0,
       nome: '',
       marca: '',
-      qntdEstoque: 0,
+      qntdestoque: 0,
       valor: 0,
-      valorEntrada: 0
+      valorentrada: 0
     }
     this.produto = valorPadraoProduto;
     this.form.reset();
@@ -299,7 +299,7 @@ export class VendaComponent implements OnInit {
     this.clickedRows.forEach((prod) => {
       this.produtos.forEach((p) => {
         const index = this.produtos.indexOf(p);
-        prod.idProduto === p.id ? this.produtos.splice(index, 1) : null ;
+        prod.idproduto === p.id ? this.produtos.splice(index, 1) : null ;
       })
     })
     this.dataSource.data = this.produtos;

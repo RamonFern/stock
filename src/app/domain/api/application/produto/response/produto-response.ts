@@ -2,8 +2,8 @@ export interface ProdutoResponse {
   id: number
   nome: string
 	marca: string
-	qntdEstoque: number
-  valorEntrada: number
+	qntdestoque: number
+  valorentrada: number
 	valor: number
 }
 
