@@ -24,4 +24,8 @@ export class VendaService {
     return this.httpClient.get<VendaResponse[]>(`${this.baseUrl}api/venda/hoje`);
   }
 
+  listarPorData(data: string) {
+    return this.httpClient.get<VendaResponse[]>(`${this.baseUrl}api/venda/por-data?data=${data}`);
+  }
+
 }

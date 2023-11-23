@@ -109,6 +109,8 @@
 
 .total__nota {
   display: flex;
+  margin-top: 20px;
+  justify-content: flex-end;
 }
 
 .esq__inter {

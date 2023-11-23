@@ -1,8 +1,9 @@
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ApplicationRoutingModule } from './application-routing.module';
-import { MatOptionModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MenuComponent } from './layout/components/menu/menu.component';
 import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -44,9 +45,11 @@ import { EditarProdutoComponent } from './gerenciar/dialogs/editar-produto/edita
       ApplicationRoutingModule,
       MatCardModule,
       MatOptionModule,
+      MatDatepickerModule,
       MatDividerModule,
       FormsModule,
       ReactiveFormsModule,
+      MatNativeDateModule,
       MatProgressSpinnerModule,
       MatDialogModule,
       MatTableModule,
