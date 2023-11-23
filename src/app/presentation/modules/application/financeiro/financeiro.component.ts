@@ -6,6 +6,7 @@ import { VendaService } from 'src/app/domain/api/application/venda/service/venda
 import html2canvas from 'html2canvas';
 import { FormControl, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-financeiro',
@@ -17,16 +18,16 @@ export class FinanceiroComponent implements OnInit {
   vendas: VendaResponse[] = [];
   vendasUnificadas: VendaResponse[] = [];
   vendasDia = true;
-  formData = new FormControl();
+  formData = new FormControl(null, Validators.required);
 
-  constructor(private vendasService: VendaService) { }
+  constructor(private vendasService: VendaService, private notification: MatSnackBar,) { }
 
   ngOnInit() {
     this.buscarVendasDoDia();
   }
 
   buscarPorData() {
-    // Aqui você pode acessar a data formatada usando this.formData.value
+    if(this.formData.valid){
     const dataSelecionada: Date = this.formData.value;
     const dataFormatada: string = this.formatarData(dataSelecionada);
 
@@ -36,6 +37,10 @@ export class FinanceiroComponent implements OnInit {
           this.vendas = vendas;
           this.unificarVendas(this.vendas);
         })
+    } else {
+      this.notification.open('Informe uma data!', 'ERRO', { duration: 3000 });
+    }
+    // Aqui você pode acessar a data formatada usando this.formData.value
   }
 
   formatarData(data: Date): string {

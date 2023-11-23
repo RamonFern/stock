@@ -19,8 +19,8 @@
       <span class="headline-4 tab-label__title">Visualizar todos</span>
     </a>
   </div>
-  <div class="tabs__nav-bar" #navbar>
-    <a  class="tab-label mat-elevation-z8" (click)="buscarPorData()">
+  <div class="tabs__nav-bar" #navbar >
+    <a  class="tab-label mat-elevation-z8" (click)="buscarPorData()" >
       <mat-icon class="nav__icon">
         <span class="material-symbols-outlined">
           sell
@@ -30,18 +30,17 @@
     </a>
   </div>
   <mat-form-field appearance="outline">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker" [formControl]="formData">
-    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+    <div class="data">
+      <mat-label>data</mat-label>
+      <input matInput [matDatepicker]="picker" [formControl]="formData">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </div>
   </mat-form-field>
-
 </div>
 
 <mat-card class="example-card" id="htmlData" *ngIf="vendasUnificadas.length">
   <mat-card-header>
-    <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
     <mat-card-title *ngIf="vendasDia">Vendas do dia {{ vendas[0].datavenda  | date:'dd/MM/yyyy' }}</mat-card-title>
     <mat-card-title *ngIf="!vendasDia">Todas Vendas desde {{ vendas[0].datavenda  | date:'dd/MM/yyyy' }}</mat-card-title>
   </mat-card-header>
@@ -72,7 +71,6 @@
     <button mat-button>CANCELAR</button>
   </mat-card-actions>
   <mat-card-footer>
-    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
   </mat-card-footer>
 </mat-card>
 

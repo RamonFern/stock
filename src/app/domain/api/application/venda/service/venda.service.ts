@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { VendaResponse } from '../response/venda-response';
 import { CreateVendaRequest } from '../request/venda-request';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VendaService {
 
-  baseUrl = "http://localhost:8080/";
+  baseUrl = environment.baseURL;
 
   constructor(private httpClient: HttpClient) { }
 

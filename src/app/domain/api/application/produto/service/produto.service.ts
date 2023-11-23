@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateProdutoRequest } from '../request/create-produto-request';
 import { ProdutoResponse } from '../response/produto-response';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { ProdutoResponse } from '../response/produto-response';
 })
 export class ProdutoService {
 
-  baseUrl = "http://localhost:8080/";
+  baseUrl = environment.baseURL;
 
   constructor(private httpClient: HttpClient) { }
 
