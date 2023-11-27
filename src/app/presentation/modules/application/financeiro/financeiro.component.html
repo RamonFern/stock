@@ -29,14 +29,20 @@
       <span class="headline-4 tab-label__title" >Visualizar por data</span>
     </a>
   </div>
-  <mat-form-field appearance="outline">
+  <!-- <mat-form-field appearance="outline">
     <div class="data">
       <mat-label>data</mat-label>
       <input matInput [matDatepicker]="picker" [formControl]="formData">
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </div>
-  </mat-form-field>
+  </mat-form-field> -->
+  <mat-form-field appearance="outline">
+    <mat-label>Data</mat-label>
+    <input matInput [matDatepicker]="picker" [formControl]="formData" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
 </div>
 
 <mat-card class="example-card" id="htmlData" *ngIf="vendasUnificadas.length">

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseURL: 'http://localhost:8080/',
+  baseURL: 'productstock-production.up.railway.app/',// http://localhost:8080
 };
 
 

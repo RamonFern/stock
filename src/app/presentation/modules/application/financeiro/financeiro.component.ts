@@ -18,7 +18,7 @@ export class FinanceiroComponent implements OnInit {
   vendas: VendaResponse[] = [];
   vendasUnificadas: VendaResponse[] = [];
   vendasDia = true;
-  formData = new FormControl(null, Validators.required);
+  formData = new FormControl(moment().locale('pt'), Validators.required);
 
   constructor(private vendasService: VendaService, private notification: MatSnackBar,) { }
 
@@ -36,11 +36,11 @@ export class FinanceiroComponent implements OnInit {
         .subscribe((vendas) => {
           this.vendas = vendas;
           this.unificarVendas(this.vendas);
+          this.formData.reset();
         })
     } else {
       this.notification.open('Informe uma data!', 'ERRO', { duration: 3000 });
     }
-    // Aqui você pode acessar a data formatada usando this.formData.value
   }
 
   formatarData(data: Date): string {
