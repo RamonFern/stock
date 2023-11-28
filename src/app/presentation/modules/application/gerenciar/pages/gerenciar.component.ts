@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogReturn } from 'src/app/shared/models/dialog-return';
-import { CadastroProdutosComponent } from './dialogs/cadastro-produtos/cadastro-produtos.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ProdutoService } from 'src/app/domain/api/application/produto/service/produto.service';
 import { take } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProdutoResponse } from 'src/app/domain/api/application/produto/response/produto-response';
-import { EditarProdutoComponent } from './dialogs/editar-produto/editar-produto.component';
+import { EditarProdutoComponent } from '../dialogs/editar-produto/editar-produto.component';
+import { CadastroProdutosComponent } from '../dialogs/cadastro-produtos/cadastro-produtos.component';
 
 @Component({
   selector: 'app-gerenciar',

@@ -6,24 +6,24 @@ export class MenuItem {
     link?: string;
     submenus?: MenuItem[];
    // permissao?: PermissaoType;
-    permitido?: boolean;
+    permitido: boolean = true;
     //authService!: AuthService;
 
     public constructor(init?: Partial<MenuItem>) {
         Object.assign(this, init);
     }
 
-    // get mostrar() {
-    //     if (this.submenus?.some((s) => s.permissao && this.getPermitidoAcessar(s.permissao))) {
-    //         return true;
-    //     }
-    //     if (this.permissao) {
-    //         return this.getPermitidoAcessar(this.permissao);
-    //     }
-    //     return false;
-    // }
+    get mostrar() {
+        if (this.submenus?.some((s) => s.permitido && this.getPermitidoAcessar(s.permitido))) {
+            return true;
+        }
+        if (this.permitido) {
+            return this.getPermitidoAcessar(this.permitido);
+        }
+        return false;
+    }
 
-    // private getPermitidoAcessar(permissao: PermissaoType) {
-    //     return this.authService.validarPermissao(permissao.enumName);
-    // }
+    private getPermitidoAcessar(permissao: boolean) {
+        return true;
+    }
 }

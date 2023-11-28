@@ -14,6 +14,24 @@ export class AppMenuConfig {
             label: 'Gerenciar',
             icon: 'settings',
             link: 'gerenciar',
+            submenus: [
+              new MenuItem({
+                  label: 'Estoque',
+                  icon: 'splitscreen',
+                  link: 'app/gerenciar/estoque',
+                  // permissao: PermissaoType.ACESSO_PAGINA_ESPECIALIZACOES,
+                  // authService: this.authService,
+              }),
+              // new MenuItem({
+              //     label: 'Tabela de Valores',
+              //     icon: 'price_check',
+              //     link: 'app/gerenciar/tabela-de-valores',
+              //     // permissao: PermissaoType.ACESSO_PAGINA_TABELA_VALORES,
+              //     // authService: this.authService,
+              // }),
+
+
+          ],
             // authService: this.authService,
         }),
         new MenuItem({
@@ -26,30 +44,7 @@ export class AppMenuConfig {
           label: 'Financeiro',
           icon: 'monetization_on',
           link: 'financeiro',
-          // authService: this.authService,
-          // submenus: [
-          //     new MenuItem({
-          //         label: 'Bancos',
-          //         icon: 'account_balance',
-          //         link: 'app/financeiro/banco',
-          //         // permissao: PermissaoType.ACESSO_PAGINA_BANCOS,
-          //         // authService: this.authService,
-          //     }),
-          //     new MenuItem({
-          //         label: 'Condomínio',
-          //         icon: 'currency_exchange',
-          //         link: 'app/financeiro/condominio',
-          //         // permissao: PermissaoType.ACESSO_PAGINA_CONDOMINIO,
-          //         // authService: this.authService,
-          //     }),
-          //     new MenuItem({
-          //         label: 'Contas financeiras',
-          //         icon: 'point_of_sale',
-          //         link: 'app/financeiro/conta-financeira',
-          //         // permissao: PermissaoType.ACESSO_PAGINA_CONTA_FINANCEIRA,
-          //         // authService: this.authService,
-          //     }),
-          // ],
+
       }),
 
         new MenuItem({
