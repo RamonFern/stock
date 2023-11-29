@@ -15,19 +15,6 @@ body {
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05) !important;
 }
 
-.snackbar {
-    white-space: pre-wrap;
-}
-
-::ng-deep .mat-form-field {
-    font-size: 10px;
-}
-
-::ng-deep.cdk-overlay-pane {
-    width: 100%;
-    height: 100%;
-}
-
 @media (max-width: 1000px) {
     ::ng-deep .cdk-overlay-pane {
         width: 100%;
@@ -102,74 +89,4 @@ body {
     font-size: 14px;
     font-weight: 700;
     line-height: 16px;
-}
-
-/* //////////////////  botoes footer dialog  ///////////////////////////// */
-
-.button-group-footer {
-    margin-top: 20px;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.button-bottom {
-    background: none;
-    border: none;
-    font-weight: bold;
-    font-size: 14px;
-    letter-spacing: 0.5px;
-    /* padding: 0px 16px; */
-    color: rgba(0, 0, 0, 0.6);
-}
-
-.button-bottom:hover {
-    cursor: pointer;
-}
-
-/* ////////////////////////////////////////////// */
-
-.extended-fab-button .mat-fab {
-    width: unset;
-    padding: 0 26px;
-    border-radius: 29px;
-}
-
-.extended-fab-button .mat-fab > .mat-icon {
-    margin-right: 10px;
-}
-
-.extended-fab-button .mat-fab > .extended-fab-button__text {
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-
-.mat-tab-label.mat-tab-label-active {
-    color: #3560f1 !important;
-    opacity: 1 !important;
-}
-
-.flex {
-    display: flex;
-}
-.align-items-center {
-    align-items: center;
-}
-.flex-column {
-    display: flex;
-    flex-direction: column;
-}
-.gap-0 {
-    gap: 4px;
-}
-.gap-1 {
-    gap: 8px;
-}
-
-.gap-2 {
-    gap: 16px;
-}
-
-.gap-3 {
-    gap: 24px;
 }

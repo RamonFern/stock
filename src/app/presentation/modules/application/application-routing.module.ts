@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { VendaComponent } from './venda/venda.component';
 import { FinanceiroComponent } from './financeiro/financeiro.component';
 
 
@@ -23,6 +22,7 @@ const routes: Routes = [
                 // },
             },
             { path: 'gerenciar', loadChildren: () => import('./gerenciar/gerenciar.module').then((m) => m.GerenciarModule) },
+            { path: 'venda', loadChildren: () => import('./venda/venda.module').then((m) => m.VendaModule) },
           //   {
           //     path: 'gerenciar',
           //     component: GerenciarComponent,
@@ -32,15 +32,15 @@ const routes: Routes = [
           //     //     permissao: PermissaoType.ACESSO_PAGINA_DASHBOARD,
           //     // },
           // },
-            {
-              path: 'vender',
-              component: VendaComponent,
-              // canActivate: [AuthGuard],
-              // canLoad: [AuthGuard],
-              // data: {
-              //     permissao: PermissaoType.ACESSO_PAGINA_DASHBOARD,
-              // },
-            },
+            // {
+            //   path: 'vender',
+            //   component: VendaComponent,
+            //   // canActivate: [AuthGuard],
+            //   // canLoad: [AuthGuard],
+            //   // data: {
+            //   //     permissao: PermissaoType.ACESSO_PAGINA_DASHBOARD,
+            //   // },
+            // },
             {
               path: 'financeiro',
               component: FinanceiroComponent,

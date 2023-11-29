@@ -22,22 +22,22 @@ export class AppMenuConfig {
                   // permissao: PermissaoType.ACESSO_PAGINA_ESPECIALIZACOES,
                   // authService: this.authService,
               }),
-              // new MenuItem({
-              //     label: 'Tabela de Valores',
-              //     icon: 'price_check',
-              //     link: 'app/gerenciar/tabela-de-valores',
-              //     // permissao: PermissaoType.ACESSO_PAGINA_TABELA_VALORES,
-              //     // authService: this.authService,
-              // }),
-
-
           ],
             // authService: this.authService,
         }),
         new MenuItem({
-            label: 'Vender',
+            label: 'Venda',
             icon: 'storefront',
-            link: 'vender',
+            link: 'venda',
+            submenus: [
+              new MenuItem({
+                  label: 'Vender',
+                  icon: 'currency_exchange',
+                  link: 'app/venda/vender',
+                  // permissao: PermissaoType.ACESSO_PAGINA_ESPECIALIZACOES,
+                  // authService: this.authService,
+              }),
+            ]
             // authService: this.authService,
         }),
         new MenuItem({

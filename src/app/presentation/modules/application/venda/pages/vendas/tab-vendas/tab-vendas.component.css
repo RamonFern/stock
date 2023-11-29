@@ -1,0 +1,25 @@
+.accordion {
+  margin-bottom: 10px;
+}
+
+.panel {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.esq__inter-header {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+  gap: 1rem;
+  padding: 15px;
+  margin-bottom: 5px;
+  justify-items: center;
+  align-items: center;
+}
+
+.total__nota {
+  display: flex;
+  margin-top: 20px;
+  justify-content: flex-end;
+}

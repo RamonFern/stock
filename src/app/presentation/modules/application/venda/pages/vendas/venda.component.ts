@@ -1,5 +1,5 @@
 import { VendaFiltradas, VendaResponse } from 'src/app/domain/api/application/venda/response/venda-response';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProdutoResponse } from 'src/app/domain/api/application/produto/response/produto-response';
@@ -9,9 +9,10 @@ import * as moment from 'moment';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CreateVendaRequest } from 'src/app/domain/api/application/venda/request/venda-request';
 import { DialogReturn } from 'src/app/shared/models/dialog-return';
-import { AumentarQuantidadeComponent } from './dialogs/aumentar-quantidade/aumentar-quantidade.component';
 import { VendaService } from 'src/app/domain/api/application/venda/service/venda.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AumentarQuantidadeComponent } from '../../dialogs/aumentar-quantidade/aumentar-quantidade.component';
+
 
 @Component({
   selector: 'app-venda',
@@ -27,6 +28,8 @@ export class VendaComponent implements OnInit {
 
   produtos: ProdutoResponse[] = [];
   produto!: ProdutoResponse;
+  vendas: VendaResponse[] = []
+  @Input() vendasFiltradas: VendaFiltradas[] = []
 
   @ViewChild('input') input!: ElementRef;
   @ViewChild('qtd') qtd!: ElementRef;
@@ -39,8 +42,7 @@ export class VendaComponent implements OnInit {
   formTotais: FormGroup;
   total!: number;
   panelOpenState = false;
-  vendas: VendaResponse[] = []
-  vendasFiltradas: VendaFiltradas[] = []
+
 
   // dataHora: moment()
 
@@ -103,7 +105,7 @@ export class VendaComponent implements OnInit {
 
   ngOnInit() {
     this.buscarProdutos();
-    this.buscarVendas();
+
   }
 
   salvarVenda() {
@@ -132,6 +134,25 @@ export class VendaComponent implements OnInit {
         .pipe(take(1))
         .subscribe(() => {})
 
+  }
+
+  somarTotais(lista: CreateVendaRequest[]): number {
+    return lista.reduce((total, venda) => total + venda.total, 0);
+  }
+
+  finalizarCancelarVenda() {
+    this.finalizar = !this.finalizar;
+  }
+
+  proximo() {
+    this.finalizar = !this.finalizar;
+    this.valorRecebido.nativeElement.focus();
+  }
+
+  criarVenda() {
+    this.botoes = !this.botoes;
+    this.buscarProdutos();
+    //this.buscarVendas();
   }
 
   buscarVendas() {
@@ -178,24 +199,7 @@ export class VendaComponent implements OnInit {
     return this.vendasFiltradas;
   }
 
-  somarTotais(lista: CreateVendaRequest[]): number {
-    return lista.reduce((total, venda) => total + venda.total, 0);
-  }
 
-  finalizarCancelarVenda() {
-    this.finalizar = !this.finalizar;
-  }
-
-  proximo() {
-    this.finalizar = !this.finalizar;
-    this.valorRecebido.nativeElement.focus();
-  }
-
-  criarVenda() {
-    this.botoes = !this.botoes;
-    this.buscarProdutos();
-    //this.buscarVendas();
-  }
 
   addProdutoNaNota(prod: ProdutoResponse) {
     this.produto = prod;
@@ -278,7 +282,7 @@ export class VendaComponent implements OnInit {
     this.produtos = [];
     this.vendas = [];
     this.dataSource.data = [];
-    this.vendasFiltradas = [];
+    // this.vendasFiltradas = [];
     this.finalizar = !this.finalizar;
     this.botoes = true;
     this.buscarVendas();

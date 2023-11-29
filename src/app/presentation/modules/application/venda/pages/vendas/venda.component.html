@@ -18,44 +18,7 @@
     </div>
   </div>
 
-  <mat-accordion>
-    <div *ngFor="let venda of vendasFiltradas" class="accordion">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            nº nota: {{venda.numeronota}}
-          </mat-panel-title>
-          <mat-panel-description>
-            <div class="panel">
-              <span class="body-2">valor da nota: {{ venda.totalGeral | currency: 'BRL':'symbol' }}</span>
-              <span class="body-2">data: {{ venda.datavenda | date:'dd/MM/yyyy HH:mm' }}</span>
-            </div>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div class="esq__inter-header">
-          <span class="body-2">cod</span>
-          <span class="body-2">Nome</span>
-          <span class="body-2">unidade</span>
-          <span class="body-2">qtd</span>
-          <span class="body-2">total</span>
-        </div>
-        <!-- <span class="body-2">------------------------------------------------------------------------------------------------</span> -->
-        <div class="esq__inter-header" *ngFor="let item of venda.produtos">
-          <span>{{ item.id }}</span>
-          <span>{{ item.nome }}</span>
-          <span>{{ item.valorUnidade | currency: 'BRL':'symbol' }}</span>
-          <span>{{ item.qntd }}</span>
-          <span>{{ item.total | currency: 'BRL':'symbol' }}</span>
-        </div>
-        <!-- <span class="body-2">------------------------------------------------------------------------------------------------</span> -->
-        <div class="total__nota">
-          <span class="headline-4">TOTAL : </span>
-          <span class="headline-4">{{ venda.totalGeral | currency: 'BRL':'symbol'}}</span>
-        </div>
-        <!-- <p>total: {{ venda.totalGeral | currency: 'BRL':'symbol'}}</p> -->
-      </mat-expansion-panel>
-    </div>
-  </mat-accordion>
+  <app-tab-vendas [vendasFiltradas]="vendasFiltradas" ></app-tab-vendas>
 
 </div>
 <!-- <ng-container *ngIf="!botoes">
