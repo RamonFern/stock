@@ -29,7 +29,8 @@ export class VendaComponent implements OnInit {
   produtos: ProdutoResponse[] = [];
   produto!: ProdutoResponse;
   vendas: VendaResponse[] = []
-  @Input() vendasFiltradas: VendaFiltradas[] = []
+  vendasFiltradas: VendaFiltradas[] = []
+  numeroNota!: number;
 
   @ViewChild('input') input!: ElementRef;
   @ViewChild('qtd') qtd!: ElementRef;
@@ -42,6 +43,7 @@ export class VendaComponent implements OnInit {
   formTotais: FormGroup;
   total!: number;
   panelOpenState = false;
+  todasVendas: VendaFiltradas[] = [];
 
 
   // dataHora: moment()
@@ -105,6 +107,7 @@ export class VendaComponent implements OnInit {
 
   ngOnInit() {
     this.buscarProdutos();
+    this.buscarVendas();
 
   }
 
@@ -152,7 +155,16 @@ export class VendaComponent implements OnInit {
   criarVenda() {
     this.botoes = !this.botoes;
     this.buscarProdutos();
-    //this.buscarVendas();
+    this.buscarTodasVendas();
+  }
+
+  buscarTodasVendas() {
+    this.vendaService.listAll()
+        .pipe(take(1))
+        .subscribe((v) => {
+          this.todasVendas = this.filtrarVendasPeloNumeroNota(v);
+          this.numeroNota = this.todasVendas[this.todasVendas.length - 1].numeronota;
+        })
   }
 
   buscarVendas() {
@@ -199,8 +211,6 @@ export class VendaComponent implements OnInit {
     return this.vendasFiltradas;
   }
 
-
-
   addProdutoNaNota(prod: ProdutoResponse) {
     this.produto = prod;
     var vendas = this.clickedRows.filter((v) => v.idproduto === this.produto.id)
@@ -219,12 +229,13 @@ export class VendaComponent implements OnInit {
       });
     }
     if(this.vendas.length > 0) {
-      const ultimaVenda = this.vendas[this.vendas.length -1];
-      const numNota = ultimaVenda.numeronota + 1;
-      this.form.controls['numeronota'].setValue(numNota);
+      // const ultimaVenda = this.vendas[this.vendas.length -1];
+      // const numNota = ultimaVenda.numeronota + 1;
+      this.form.controls['numeronota'].setValue(this.numeroNota + 1);///AQUI TEM SOLUÇÃO
     } else {
       this.form.controls['numeronota'].setValue(1);
     }
+    console.log(this.numeroNota);
 
     const desc = this.produto.nome +', '+ this.produto.marca;
     this.form.controls['id'].setValue(this.produto.id);

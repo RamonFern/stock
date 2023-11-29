@@ -17,8 +17,9 @@
       </a>
     </div>
   </div>
-
-  <app-tab-vendas [vendasFiltradas]="vendasFiltradas" ></app-tab-vendas>
+  <ng-container *ngIf="vendasFiltradas.length">
+    <app-tab-vendas [vendasFiltradas]="vendasFiltradas" ></app-tab-vendas>
+  </ng-container>
 
 </div>
 <!-- <ng-container *ngIf="!botoes">
@@ -67,12 +68,14 @@
             <span class="headline-4">{{ total | currency: 'BRL':'symbol' }}</span>
           </div>
       </div>
-      <div>
-        <button mat-stroked-button (click)="proximo()" color="primary" *ngIf="finalizar">Próximo</button>
-        <ng-container *ngIf="!finalizar">
-          <button mat-stroked-button (click)="finalizarCancelarVenda()" color="warn">Adicionar + produto na nota</button>
-          <button mat-stroked-button (click)="fecharVenda()" color="primary">Finalizar venda</button>
-        </ng-container>
+      <div class="btn__finalizar">
+        <button mat-stroked-button class="btn" (click)="proximo()" color="primary" *ngIf="finalizar">
+          <span class="body-2">Próximo</span>
+        </button>
+        <div *ngIf="!finalizar" class="btn__final">
+          <button mat-stroked-button class="btn" (click)="finalizarCancelarVenda()" color="warn">Adicionar + produto na nota</button>
+          <button mat-stroked-button class="btn" (click)="fecharVenda()" color="primary">Finalizar venda</button>
+        </div>
       </div>
     </div>
     <div class="meio" *ngIf="finalizar">
@@ -162,7 +165,7 @@
             </div>
           </form>
           <div class="example-button-row" *ngIf="produto && produto?.id !== 0">
-            <button mat-raised-button (click)="enviarParaNota()">
+            <button mat-raised-button (click)="enviarParaNota()" color="primary">
               <mat-icon>done</mat-icon>
               adicionar na nota
             </button>
