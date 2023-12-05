@@ -17,7 +17,7 @@ export class TabVendasComponent implements OnInit {
   constructor(private vendaService: VendaService) { }
 
   ngOnInit() {
-    console.log(this.vendasFiltradas);
+    //console.log(this.vendasFiltradas);
     //this.buscarVendas();
   }
 

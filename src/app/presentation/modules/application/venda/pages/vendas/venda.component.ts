@@ -1,11 +1,10 @@
 import { VendaFiltradas, VendaResponse } from 'src/app/domain/api/application/venda/response/venda-response';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProdutoResponse } from 'src/app/domain/api/application/produto/response/produto-response';
 import { ProdutoService } from 'src/app/domain/api/application/produto/service/produto.service';
 import { debounceTime, take } from 'rxjs';
-import * as moment from 'moment';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CreateVendaRequest } from 'src/app/domain/api/application/venda/request/venda-request';
 import { DialogReturn } from 'src/app/shared/models/dialog-return';
@@ -45,9 +44,6 @@ export class VendaComponent implements OnInit {
   panelOpenState = false;
   todasVendas: VendaFiltradas[] = [];
 
-
-  // dataHora: moment()
-
   constructor(private produtoService: ProdutoService,
               private notification: MatSnackBar,
               private vendaService: VendaService,
@@ -76,7 +72,6 @@ export class VendaComponent implements OnInit {
                     const total = values.totalGeral;
                     const troco = valorRecebido - total;
                     this.formTotais.get('troco')?.setValue(troco.toFixed(2));
-                    //this.form.get('total')?.setValue(quantidade * preco);
                   })
 
                 this.form = this.fb.group({
@@ -95,10 +90,8 @@ export class VendaComponent implements OnInit {
                   const quantidade = values.quantidade;
                   const preco = values.preco;
                   const total = quantidade * preco
-                  // this.form.get('preco')?.setValue(preco.toFixed(2));
                   this.form.get('total')?.setValue(total);
                   this.total = this.somarTotais(this.clickedRows);
-                  // const totalGeral = this.total
                   this.formTotais.get('totalGeral')?.setValue(this.total);
                   this.form.get('id')?.disable();
                   this.form.get('descricao')?.disable();
@@ -107,8 +100,17 @@ export class VendaComponent implements OnInit {
 
   ngOnInit() {
     this.buscarProdutos();
-    this.buscarVendas();
+    this.buscarVendasDoDia();
+    this.numeroUltimaNota();
 
+  }
+
+  numeroUltimaNota() {
+    this.vendaService.ultimaNota()
+        .pipe(take(1))
+        .subscribe((n) => {
+          n !== null ? this.numeroNota = n : this.numeroNota = 1;
+        })
   }
 
   salvarVenda() {
@@ -116,7 +118,6 @@ export class VendaComponent implements OnInit {
       this.vendaService.createVenda(venda)
           .pipe(take(1))
           .subscribe((v) => {
-            // console.log(v);
             this.buscarProdutoPorId(v)
           })
     })
@@ -155,25 +156,15 @@ export class VendaComponent implements OnInit {
   criarVenda() {
     this.botoes = !this.botoes;
     this.buscarProdutos();
-    this.buscarTodasVendas();
+    this.numeroUltimaNota();
   }
 
-  buscarTodasVendas() {
-    this.vendaService.listAll()
-        .pipe(take(1))
-        .subscribe((v) => {
-          this.todasVendas = this.filtrarVendasPeloNumeroNota(v);
-          this.numeroNota = this.todasVendas[this.todasVendas.length - 1].numeronota;
-        })
-  }
-
-  buscarVendas() {
+  buscarVendasDoDia() {
     this.vendaService.listAllToDay()
         .pipe(take(1))
         .subscribe((v) => {
           this.vendas = v;
           this.filtrarVendasPeloNumeroNota(this.vendas);
-          // console.log(v);
         })
   }
 
@@ -207,7 +198,6 @@ export class VendaComponent implements OnInit {
         vendaFiltradaExistente.totalGeral += venda.total;
       }
     });
-    // console.log(this.vendasFiltradas);
     return this.vendasFiltradas;
   }
 
@@ -228,25 +218,20 @@ export class VendaComponent implements OnInit {
         }
       });
     }
-    if(this.vendas.length > 0) {
-      // const ultimaVenda = this.vendas[this.vendas.length -1];
-      // const numNota = ultimaVenda.numeronota + 1;
-      this.form.controls['numeronota'].setValue(this.numeroNota + 1);///AQUI TEM SOLUÇÃO
+    if(this.vendas.length) {
+      this.form.controls['numeronota'].setValue(this.numeroNota + 1);
     } else {
       this.form.controls['numeronota'].setValue(1);
     }
-    console.log(this.numeroNota);
 
     const desc = this.produto.nome +', '+ this.produto.marca;
     this.form.controls['id'].setValue(this.produto.id);
     this.form.controls['descricao'].setValue(desc);
     this.form.controls['quantidade'].setValue(1);
-    // this.qtd.nativeElement.focus();
     this.form.controls['preco'].setValue(this.produto.valor);
     this.form.controls['total'].setValue(this.produto.valor);
     this.removerObjeto(prod, this.produtos);
     this.dataSource.data = this.produtos;
-    // this.form.get('quantidade')?.markAsTouched(); //.markAsTouched();
   }
 
   enviarParaNota() {
@@ -261,15 +246,12 @@ export class VendaComponent implements OnInit {
         total: this.form.controls['total'].value,
         status: 'PENDENTE',
         formapag: 'DINHEIRO',
-        // dataVenda: '2023-10-27T10:15:30+01:00',
-        // dataVenda: moment().locale('pt').toLocaleString(),
       }
       this.clickedRows.push(vendaRequest);
       this.zerarProduto();
     } else {
       this.notification.open('Existe(m) campo(s) inválido(s)!', 'Erro', { duration: 3000 });
     }
-    // PENSAR EM LÓGICA PARA DIMINUIR QUANT DE PRODUTOS COMFORME VENDA MANUTENÇÃO NO ESTOQUE
   }
 
   fecharVenda() {
@@ -280,9 +262,8 @@ export class VendaComponent implements OnInit {
     } else {
       this.salvarVenda();
       this.cancelarVenda();
-      this.buscarVendas();
+      this.buscarVendasDoDia();
     }
-    // console.log(this.clickedRows);
   }
 
   cancelarVenda() {
@@ -293,11 +274,9 @@ export class VendaComponent implements OnInit {
     this.produtos = [];
     this.vendas = [];
     this.dataSource.data = [];
-    // this.vendasFiltradas = [];
     this.finalizar = !this.finalizar;
     this.botoes = true;
-    this.buscarVendas();
-    // this.zerarProduto();//CONTINUAR AQUI RESOLVENDO CANCELAR VENDA PARA RETORNAR TODOS INPUTS PARA INICIAR NOVA VENDA
+    this.buscarVendasDoDia();
     this.buscarProdutos();
   }
 
