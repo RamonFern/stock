@@ -1,0 +1,46 @@
+<div class="esq">
+  <div class="header__sub">
+    <div class="sub">
+      <span class="headline-4">NOTA</span>
+    </div>
+  </div>
+  <div class="esq__inter">
+    <span class="body-2">-----------------------------------------------------------------------------------------------</span>
+    <span class="body-2">Comércio:  Nunes Cimento</span>
+    <span class="body-2">Endereço: Rua Estefânio Saldanha, Rosário</span>
+    <span class="body-2">Telefone:  989 8999-2112</span>
+    <span class="body-2">CNPJ:  23.423.324/0001-23</span>
+    <span class="body-2">-----------------------------------------------------------------------------------------------</span>
+    <span class="body-2">NOTA SEM VALOR FISCAL</span>
+    <span class="body-2">-----------------------------------------------------------------------------------------------</span>
+    <div class="esq__inter-header">
+      <span class="body-2">cod</span>
+      <span class="body-2">Nome</span>
+      <span class="body-2">unidade</span>
+      <span class="body-2">qtd</span>
+      <span class="body-2">total</span>
+    </div>
+    <span class="body-2" *ngIf="clickedRows.length">------------------------------------------------------------------------------------------------</span>
+    <div class="esq__inter-header" *ngFor="let item of clickedRows">
+      <span>{{item.idproduto}}</span>
+      <span>{{item.nomeproduto}}</span>
+      <span>{{item.valorunidade | currency: 'BRL':'symbol'}}</span>
+      <span>{{item.quantidade}}</span>
+      <span>{{item.total | currency: 'BRL':'symbol'}}</span>
+    </div>
+    <span class="body-2">------------------------------------------------------------------------------------------------</span>
+    <div class="totais">
+      <div class="total__nota">
+        <span class="headline-4">TOTAL : </span>
+        <span class="headline-4">{{ total | currency: 'BRL':'symbol' }}</span>
+      </div>
+      <div class="total__nota">
+        <span class="headline-4">VALOR RECEBIDO : </span>
+        <span class="headline-4">{{ valorRecebido | currency: 'BRL':'symbol' }}</span>
+      </div>
+      <div class="total__nota">
+        <span class="headline-4">TROCO : </span>
+        <span class="headline-4">{{ troco | currency: 'BRL':'symbol' }}</span>
+      </div>
+    </div>
+</div>

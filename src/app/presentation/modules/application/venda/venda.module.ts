@@ -11,6 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { VendaRoutingModule } from './venda-routing.module';
 import { TabVendasComponent } from './pages/vendas/tab-vendas/tab-vendas.component';
+import { NotaComponent } from './dialogs/nota/nota.component';
 
 
 
@@ -18,7 +19,8 @@ import { TabVendasComponent } from './pages/vendas/tab-vendas/tab-vendas.compone
   declarations: [
     AumentarQuantidadeComponent,
     VendaComponent,
-    TabVendasComponent
+    TabVendasComponent,
+    NotaComponent
   ],
   imports: [
     CommonModule,

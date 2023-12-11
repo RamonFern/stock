@@ -1,3 +1,4 @@
+import { NotaComponent } from './../../dialogs/nota/nota.component';
 import { VendaFiltradas, VendaResponse } from 'src/app/domain/api/application/venda/response/venda-response';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -110,6 +111,7 @@ export class VendaComponent implements OnInit {
         .pipe(take(1))
         .subscribe((n) => {
           n !== null ? this.numeroNota = n : this.numeroNota = 1;
+          console.log(this.numeroNota);
         })
   }
 
@@ -261,9 +263,22 @@ export class VendaComponent implements OnInit {
       this.notification.open('O valor recebido não pode ser menor do que o valor total', 'Erro', { duration: 3000 });
     } else {
       this.salvarVenda();
+      this.exibirNota();
       this.cancelarVenda();
       this.buscarVendasDoDia();
     }
+  }
+
+  exibirNota() {
+    const dialogRef = this.dialog.open(NotaComponent, {
+      width: '850px',
+      data: {clickedRows: this.clickedRows, valorRecebido: this.formTotais.controls['valorRecebido'].value, troco: this.formTotais.controls['troco'].value}
+    });
+
+    dialogRef.afterClosed().subscribe((dialogReturn: DialogReturn) => {
+      if (dialogReturn?.hasDataChanged) {
+      }
+    });
   }
 
   cancelarVenda() {

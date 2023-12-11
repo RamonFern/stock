@@ -1,0 +1,54 @@
+.esq {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header__sub-dir {
+  display: flex;
+  justify-content: space-around;
+  width: 55%;
+}
+
+.header__sub {
+  display: flex;
+  justify-content: space-around;
+  width: 85%;
+}
+
+.sub {
+  display: flex;
+  width: 92%;
+  border-radius: 50px;
+  background-color: cadetblue;
+  color: white;
+  justify-content: center;
+}
+
+.esq__inter {
+  display: flex;
+  width: 93%;
+  font-weight: 900;
+  margin-top: 10px;
+  background-color: #fff0b8;
+  min-height: 80%;
+  margin-bottom: 14px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.esq__inter-header {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+  gap: 1rem;
+  padding: 15px;
+  margin-bottom: 5px;
+  justify-items: center;
+  align-items: center;
+}
+
+.totais {
+  display: flex;
+  flex-direction: column;
+}
