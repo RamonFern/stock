@@ -4,7 +4,7 @@
       <span class="headline-4">NOTA</span>
     </div>
   </div>
-  <div class="esq__inter">
+  <div class="esq__inter" id="nota" #nota>
     <span class="body-2">-----------------------------------------------------------------------------------------------</span>
     <span class="body-2">Comércio:  Nunes Cimento</span>
     <span class="body-2">Endereço: Rua Estefânio Saldanha, Rosário</span>
@@ -43,4 +43,5 @@
         <span class="headline-4">{{ troco | currency: 'BRL':'symbol' }}</span>
       </div>
     </div>
-</div>
+  </div>
+  <button mat-raised-button (click)="fechar()" color="warn">fechar</button>

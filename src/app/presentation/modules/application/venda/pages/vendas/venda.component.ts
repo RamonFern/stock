@@ -220,7 +220,7 @@ export class VendaComponent implements OnInit {
         }
       });
     }
-    if(this.vendas.length) {
+    if(this.numeroNota) {
       this.form.controls['numeronota'].setValue(this.numeroNota + 1);
     } else {
       this.form.controls['numeronota'].setValue(1);
@@ -265,7 +265,7 @@ export class VendaComponent implements OnInit {
       this.salvarVenda();
       this.exibirNota();
       this.cancelarVenda();
-      this.buscarVendasDoDia();
+      // this.buscarVendasDoDia();
     }
   }
 
@@ -277,6 +277,7 @@ export class VendaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((dialogReturn: DialogReturn) => {
       if (dialogReturn?.hasDataChanged) {
+        this.buscarVendasDoDia();
       }
     });
   }
