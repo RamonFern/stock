@@ -1,5 +1,17 @@
 <div class="second-form-wrapper" >
   <mat-dialog-content>
+    <div>
+      <button mat-raised-button color="primary" (click)="valorDaPorcentagem()">
+        CONFIGURAR %
+      </button>
+      <ng-container *ngIf="porc">
+        <mat-form-field appearance="outline">
+          <mat-label>valor da %</mat-label>
+          <input matInput type="text" name="porcent" [(ngModel)]="porcento" />
+        </mat-form-field>
+      </ng-container>
+
+    </div>
     <form [formGroup]="form">
       <header class="header">
         <span class="headline-4">Cadastro de Produtos</span>
@@ -30,7 +42,7 @@
             </div>
             <div class="porcentagem">
               <div class="mat-elevation-z8">
-                <span class="headline-4">25%</span>
+                <span class="headline-4">{{ porcento}}%</span>
                 <mat-icon>edit</mat-icon>
               </div>
             </div>

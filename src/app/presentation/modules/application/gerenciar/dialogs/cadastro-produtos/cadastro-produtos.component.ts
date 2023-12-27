@@ -16,6 +16,8 @@ import { DialogReturn } from 'src/app/shared/models/dialog-return';
 export class CadastroProdutosComponent implements OnInit {
 
   form: FormGroup;
+  porcento = 25;
+  porc = false;
 
   constructor(private produtoService: ProdutoService,
               private notification: MatSnackBar,
@@ -37,13 +39,27 @@ export class CadastroProdutosComponent implements OnInit {
   ngOnInit() {
   }
 
+  valorDaPorcentagem() {
+    this.porc = true;
+    console.log(this.porcento);
+  }
+
   atualizarValorUnidade() {
     const valorEntrada = this.form.get('valorEntrada')?.value;
-    const porcento = 0.25; // 25%, ajuste conforme necessário
+    const porcento = this.porcentagemParaDecimal(this.porcento);  //0.25; // 25%, ajuste conforme necessário
     const novoValorUnidade = valorEntrada * (1 + porcento);
 
     // Atualize o valor do campo "valorUnidade"
     this.form.get('valorUnidade')?.patchValue(novoValorUnidade.toFixed(2), { emitEvent: false });
+  }
+
+  porcentagemParaDecimal(porcentagem: number) {
+    if (porcentagem < 0 ) {
+        throw new Error('Porcentagem inválida.');
+    }
+    // Converte a porcentagem para um número decimal dividindo por 100
+    const decimal = porcentagem / 100;
+    return decimal;
   }
 
   create() {
